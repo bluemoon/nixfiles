@@ -57,4 +57,12 @@
 
   # For VIM
   home.file.".vimrc".source = ./vimrc;
+  programs.git = {
+    enable = true;
+    userName = "bluemoon";
+    userEmail = "bradford.toney@gmail.com";
+    aliases = {
+      st = "status";
+    };
+  };
 }
