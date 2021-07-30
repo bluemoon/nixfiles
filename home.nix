@@ -15,13 +15,33 @@
     enableAliases = true;
   };
 
+  # FZF
+  programs.fzf = {
+    enable = true;
+    enableZshIntegration = true;
+  };
+
   # Enable ZSH
   programs.zsh = {
     enable = true;
     autocd = true;
     enableCompletion = true;
     enableAutosuggestions = true;
-    oh-my-zsh.enable = true;
+    oh-my-zsh = {
+      enable = true;
+
+      plugins = [
+        "command-not-found"
+        "git"
+        "history"
+        "sudo"
+      ];
+    };
+    shellAliases = {
+      k = "kubectl";
+      vi = "nvim";
+      vim = "nvim";
+    };
   };
 
 
