@@ -9,6 +9,22 @@
   home.username = "bradfordtoney";
   home.homeDirectory = "/Users/bradfordtoney";
 
+  # Better ls
+  programs.exa = {
+    enable = true;
+    enableAliases = true;
+  };
+
+  # Enable ZSH
+  programs.zsh = {
+    enable = true;
+    autocd = true;
+    enableCompletion = true;
+    enableAutosuggestions = true;
+    oh-my-zsh.enable = true;
+  };
+
+
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage
   # when a new Home Manager release introduces backwards
@@ -18,5 +34,7 @@
   # the Home Manager release notes for a list of state version
   # changes in each release.
   home.stateVersion = "21.11";
+
+  # For VIM
   home.file.".vimrc".source = ./vimrc;
 }
