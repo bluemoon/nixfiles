@@ -27,14 +27,20 @@
     autocd = true;
     enableCompletion = true;
     enableAutosuggestions = true;
+    initExtra = ''
+    export PATH=/Users/bradfordtoney/.cargo/bin:$HOME/go/bin:/usr/local/bin:/Users/bradfordtoney/.nix-profile/bin/:$PATH
+    eval "$(zoxide init zsh)"
+    '';
     oh-my-zsh = {
       enable = true;
-
+      theme = "robbyrussell";
       plugins = [
         "command-not-found"
         "git"
         "history"
         "sudo"
+        "fzf"
+        "dotenv"
       ];
     };
     shellAliases = {
@@ -44,6 +50,15 @@
     };
   };
 
+  # Git config
+  programs.git = {
+    enable = true;
+    userName = "Bradford Toney";
+    userEmail = "bradford.toney@gmail.com";
+    aliases = {
+      st = "status";
+    };
+  };
 
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage
@@ -57,12 +72,5 @@
 
   # For VIM
   home.file.".vimrc".source = ./vimrc;
-  programs.git = {
-    enable = true;
-    userName = "Bradford Toney";
-    userEmail = "bradford.toney@gmail.com";
-    aliases = {
-      st = "status";
-    };
-  };
+
 }
