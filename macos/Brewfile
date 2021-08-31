@@ -1,2 +1,6 @@
+brew "skhd"
+brew "yabai"
+
+# Casks (big apps)
 cask "firefox"
 
