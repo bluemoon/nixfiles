@@ -46,8 +46,3 @@
     ```
 
 
-To install (probably should put this in nix itself?):
-
-- install zoxide
-- install yabai
-- install skhd
