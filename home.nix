@@ -72,5 +72,7 @@
 
   # For VIM
   home.file.".vimrc".source = ./vimrc;
+  home.file.".yabairc".source = ./yabairc;
+  home.file.".skhdrc".source = ./skhdrc;
 
 }
