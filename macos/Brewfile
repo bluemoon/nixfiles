@@ -1,5 +1,6 @@
 brew "skhd"
 brew "yabai"
+brew "zoxide"
 
 # Casks (big apps)
 cask "firefox"

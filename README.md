@@ -42,7 +42,7 @@
     >   - Takes a **loooong** time
     >   - **Will ask for password a lot of times...**
     ```
-    brew bundle --verbose --file ~/.config/nixpkgs/config/macos/Brewfile
+    brew bundle --verbose --file ~/.config/nixpkgs/macos/Brewfile
     ```
 
 
