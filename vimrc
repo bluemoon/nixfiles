@@ -2,30 +2,29 @@ set termguicolors
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
+call plug#begin('~/.vim/plugged')
 " set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-Plugin 'VundleVim/Vundle.vim'
+Plug 'VundleVim/Vundle.vim'
 " Theme related
-Plugin 'morhetz/gruvbox'
-Plugin 'shinchu/lightline-gruvbox.vim'
+Plug 'morhetz/gruvbox'
+Plug 'shinchu/lightline-gruvbox.vim'
 
 " Quality of life
-Plugin 'tpope/vim-surround'
-Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'itchyny/lightline.vim'
-Plugin 'junegunn/fzf.vim'
-Plugin 'easymotion/vim-easymotion'
-Plugin 'airblade/vim-rooter'
-Plugin 'jremmen/vim-ripgrep'
+Plug 'tpope/vim-surround'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'itchyny/lightline.vim'
+Plug 'junegunn/fzf.vim'
+Plug 'easymotion/vim-easymotion'
+Plug 'airblade/vim-rooter'
+Plug 'jremmen/vim-ripgrep'
 
 " Language specific
-Plugin 'fatih/vim-go'
-Plugin 'mattn/emmet-vim'
-Plugin 'neoclide/coc.nvim'
-Plugin 'cespare/vim-toml'
-Plugin 'LnL7/vim-nix'
-call vundle#end()            " required
+Plug 'fatih/vim-go'
+Plug 'mattn/emmet-vim'
+Plug 'neoclide/coc.nvim'
+Plug 'cespare/vim-toml'
+Plug 'LnL7/vim-nix'
+call plug#end()
 filetype plugin indent on    " required
 
 "" Theme
