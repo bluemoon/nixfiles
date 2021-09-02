@@ -1,7 +1,16 @@
+tap "koekeishiya/formulae"
+tap "homebrew/cask-fonts"
 brew "skhd"
 brew "yabai"
 brew "zoxide"
+brew "neovim"
+
+# Fonts
+cask "font-iosevka"
 
 # Casks (big apps)
 cask "firefox"
-
+cask "spotify"
+cask "slack"
+cask "alacritty"
+cask "iterm2"
