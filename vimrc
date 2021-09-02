@@ -22,6 +22,7 @@ Plug 'preservim/nerdtree'
 Plug 'fatih/vim-go'
 Plug 'mattn/emmet-vim'
 Plug 'neoclide/coc.nvim'
+Plug 'rust-lang-nursery/rustfmt'
 Plug 'cespare/vim-toml'
 Plug 'LnL7/vim-nix'
 call plug#end()
@@ -40,16 +41,18 @@ endif
 set laststatus=2
 set guioptions=
 let mapleader = ","
-set tabstop=2
-set softtabstop=2
-set shiftwidth=2
-set expandtab
+set tabstop=4 softtabstop=0 expandtab shiftwidth=2 smarttab
 set textwidth=0 wrapmargin=0
 set nowrap
 set number
 set autowrite
 let g:rooter_patterns = ['.git']
 let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
+
+" Rust
+let g:rustfmt_autosave = 1
+" Vim Easymotion
+map <Leader> <Plug>(easymotion-prefix)
 
 " Go syntax highlighting
 let g:go_highlight_fields = 1
