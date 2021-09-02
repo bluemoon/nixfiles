@@ -4,7 +4,6 @@ filetype off                  " required
 
 call plug#begin('~/.vim/plugged')
 " set the runtime path to include Vundle and initialize
-Plug 'VundleVim/Vundle.vim'
 " Theme related
 Plug 'morhetz/gruvbox'
 Plug 'shinchu/lightline-gruvbox.vim'
@@ -17,6 +16,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'easymotion/vim-easymotion'
 Plug 'airblade/vim-rooter'
 Plug 'jremmen/vim-ripgrep'
+Plug 'preservim/nerdtree'
 
 " Language specific
 Plug 'fatih/vim-go'
@@ -41,8 +41,10 @@ set laststatus=2
 set guioptions=
 let mapleader = ","
 set tabstop=2
-set textwidth=0 wrapmargin=0
 set softtabstop=2
+set shiftwidth=2
+set expandtab
+set textwidth=0 wrapmargin=0
 set nowrap
 set number
 set autowrite
