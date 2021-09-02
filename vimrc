@@ -3,29 +3,28 @@ set nocompatible              " be iMproved, required
 filetype off                  " required
 
 " set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-Plugin 'VundleVim/Vundle.vim'
+call plug#begin('~/.vim/plugged')
 " Theme related
-Plugin 'morhetz/gruvbox'
-Plugin 'shinchu/lightline-gruvbox.vim'
+Plug 'morhetz/gruvbox'
+Plug 'shinchu/lightline-gruvbox.vim'
 
 " Quality of life
-Plugin 'tpope/vim-surround'
-Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'itchyny/lightline.vim'
-Plugin 'junegunn/fzf.vim'
-Plugin 'easymotion/vim-easymotion'
-Plugin 'airblade/vim-rooter'
-Plugin 'jremmen/vim-ripgrep'
+Plug 'tpope/vim-surround'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'itchyny/lightline.vim'
+Plug 'junegunn/fzf.vim'
+Plug 'easymotion/vim-easymotion'
+Plug 'airblade/vim-rooter'
+Plug 'jremmen/vim-ripgrep'
+Plug 'preservim/nerdtree'
 
 " Language specific
-Plugin 'fatih/vim-go'
-Plugin 'mattn/emmet-vim'
-Plugin 'neoclide/coc.nvim'
-Plugin 'cespare/vim-toml'
-Plugin 'LnL7/vim-nix'
-call vundle#end()            " required
+Plug 'fatih/vim-go'
+Plug 'mattn/emmet-vim'
+Plug 'neoclide/coc.nvim'
+Plug 'cespare/vim-toml'
+Plug 'LnL7/vim-nix'
+call plug#end()
 filetype plugin indent on    " required
 
 "" Theme
@@ -42,8 +41,10 @@ set laststatus=2
 set guioptions=
 let mapleader = ","
 set tabstop=2
-set textwidth=0 wrapmargin=0
 set softtabstop=2
+set shiftwidth=2
+set expandtab
+set textwidth=0 wrapmargin=0
 set nowrap
 set number
 set autowrite
