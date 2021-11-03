@@ -28,7 +28,7 @@ Plug 'LnL7/vim-nix'
 call plug#end()
 filetype plugin indent on    " required
 
-"" Theme
+" Theme {{{
 autocmd vimenter * ++nested colorscheme gruvbox
 set background=dark
 let g:lightline = {}
@@ -37,6 +37,7 @@ let g:lightline.colorscheme = 'gruvbox'
 if has('gui_running')
   set guifont=PragmataPro_Mono_Liga:h13
 endif
+" }}}
 
 " Spaces & Tabs {{{
 set tabstop=2       " number of visual spaces per TAB
