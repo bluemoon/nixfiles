@@ -47,7 +47,11 @@ set expandtab       " tabs are space
 set autoindent
 set copyindent      " copy indent from the previous line
 " }}} Spaces & Tabs
-"
+
+" NERDTree {{{
+let NERDTreeShowHidden=1
+" }}}
+
 set laststatus=2
 set guioptions=
 let mapleader = ","
