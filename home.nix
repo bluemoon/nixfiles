@@ -29,6 +29,7 @@
     enableAutosuggestions = true;
     initExtra = ''
     export PATH=/Users/bradfordtoney/.cargo/bin:$HOME/go/bin:/usr/local/bin:/Users/bradfordtoney/.nix-profile/bin/:$PATH
+    export PATH="$(yarn global bin):$PATH"
     eval "$(zoxide init zsh)"
     '';
     oh-my-zsh = {
