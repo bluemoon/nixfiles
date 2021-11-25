@@ -25,7 +25,8 @@ Plug 'neoclide/coc.nvim'
 Plug 'rust-lang-nursery/rustfmt'
 Plug 'cespare/vim-toml'
 Plug 'LnL7/vim-nix'
-call plug#end()
+Plug 'HerringtonDarkholme/yats.vim'
+all plug#end()
 filetype plugin indent on    " required
 
 " Theme {{{
@@ -50,6 +51,8 @@ set copyindent      " copy indent from the previous line
 
 " NERDTree {{{
 let NERDTreeShowHidden=1
+autocmd VimEnter * NERDTree
+autocmd VimEnter * wincmd p
 " }}}
 
 set laststatus=2
