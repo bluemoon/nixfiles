@@ -26,7 +26,7 @@
 1. Clone this repo inside `~/.config/nixpkgs` (must remove default nixpkgs before cloning)
     ```
     rm -r ~/.config/nixpkgs
-    git clone https://github.com/bluemoon/nixfiles ~/.config/nixpkgs
+    git clone git@github.com:bluemoon/nixfiles.git ~/.config/nixpkgs
     ```
 1. Setup home-manager configuration (install and configure programs)
     ```
