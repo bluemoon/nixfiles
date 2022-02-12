@@ -17,6 +17,8 @@ Plug 'easymotion/vim-easymotion'
 Plug 'airblade/vim-rooter'
 Plug 'jremmen/vim-ripgrep'
 Plug 'preservim/nerdtree'
+Plug 'preservim/nerdcommenter'
+Plug 'chaoren/vim-wordmotion'
 
 " Language specific
 Plug 'fatih/vim-go'
@@ -26,7 +28,7 @@ Plug 'rust-lang-nursery/rustfmt'
 Plug 'cespare/vim-toml'
 Plug 'LnL7/vim-nix'
 Plug 'HerringtonDarkholme/yats.vim'
-all plug#end()
+call plug#end()
 filetype plugin indent on    " required
 
 " Theme {{{
@@ -51,8 +53,10 @@ set copyindent      " copy indent from the previous line
 
 " NERDTree {{{
 let NERDTreeShowHidden=1
+let g:NERDTreeWinSize=40
 autocmd VimEnter * NERDTree
 autocmd VimEnter * wincmd p
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 " }}}
 
 set laststatus=2
