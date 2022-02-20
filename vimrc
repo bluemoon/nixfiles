@@ -2,33 +2,49 @@ set termguicolors
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
-call plug#begin('~/.vim/plugged')
-" set the runtime path to include Vundle and initialize
-" Theme related
-Plug 'morhetz/gruvbox'
-Plug 'shinchu/lightline-gruvbox.vim'
-
 " Quality of life
-Plug 'tpope/vim-surround'
-Plug 'ctrlpvim/ctrlp.vim'
-Plug 'itchyny/lightline.vim'
-Plug 'junegunn/fzf.vim'
-Plug 'easymotion/vim-easymotion'
-Plug 'airblade/vim-rooter'
-Plug 'jremmen/vim-ripgrep'
-Plug 'preservim/nerdtree'
-Plug 'preservim/nerdcommenter'
-Plug 'chaoren/vim-wordmotion'
+"Plug 'tpope/vim-surround'
+"Plug 'easymotion/vim-easymotion'
+"Plug 'chaoren/vim-wordmotion'
 
 " Language specific
-Plug 'fatih/vim-go'
-Plug 'mattn/emmet-vim'
-Plug 'neoclide/coc.nvim'
-Plug 'rust-lang-nursery/rustfmt'
-Plug 'cespare/vim-toml'
-Plug 'LnL7/vim-nix'
-Plug 'HerringtonDarkholme/yats.vim'
-call plug#end()
+"Plug 'fatih/vim-go'
+"Plug 'mattn/emmet-vim'
+"Plug 'neoclide/coc.nvim'
+"Plug 'rust-lang-nursery/rustfmt'
+"Plug 'cespare/vim-toml'
+"Plug 'LnL7/vim-nix'
+"Plug 'HerringtonDarkholme/yats.vim'
+
+
+if &compatible
+  set nocompatible
+endif
+
+function! s:packager_init(packager) abort
+  call a:packager.add('kristijanhusak/vim-packager', { 'type': 'opt' })
+  "" Theme 
+  call a:packager.add('morhetz/gruvbox')
+  call a:packager.add('shinchu/lightline-gruvbox')
+ 
+  "" Quality of life
+  call a:packager.add('neoclide/coc.nvim', { 'do': function('InstallCoc') })
+  call a:packager.add('preservim/nerdcommenter')
+  call a:packager.add('preservim/nerdtree')
+  call a:packager.add('airblade/vim-rooter')
+  call a:packager.add('tpope/ctrlp')
+  call a:packager.add('itchyny/lightline')
+  call a:packager.add('junegunn/fzf')
+endfunction
+
+function! InstallCoc(plugin) abort
+  exe '!cd '.a:plugin.dir.' && yarn install'
+  call coc#add_extension('coc-eslint', 'coc-tsserver', 'coc-pyls', 'coc-rust-analyzer')
+endfunction
+
+packadd vim-packager
+call packager#setup(function('s:packager_init'))
+
 filetype plugin indent on    " required
 
 " Theme {{{
@@ -57,6 +73,16 @@ let g:NERDTreeWinSize=40
 autocmd VimEnter * NERDTree
 autocmd VimEnter * wincmd p
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+" }}}
+
+
+" Wordmotion {{{
+"let g:wordmotion_nomap = 1
+"nmap w          <Plug>WordMotion_w
+"nmap b          <Plug>WordMotion_b
+"nmap gE         <Plug>WordMotion_gE
+"omap aW         <Plug>WordMotion_aW
+"cmap <C-R><C-W> <Plug>WordMotion_<C-R><C-W>
 " }}}
 
 set laststatus=2
