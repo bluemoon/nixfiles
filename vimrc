@@ -25,7 +25,7 @@ function! s:packager_init(packager) abort
   call a:packager.add('kristijanhusak/vim-packager', { 'type': 'opt' })
   "" Theme 
   call a:packager.add('morhetz/gruvbox')
-  call a:packager.add('shinchu/lightline-gruvbox')
+  call a:packager.add('shinchu/lightline-gruvbox.vim')
  
   "" Quality of life
   call a:packager.add('neoclide/coc.nvim', { 'do': function('InstallCoc') })
