@@ -32,8 +32,8 @@ function! s:packager_init(packager) abort
   call a:packager.add('preservim/nerdcommenter')
   call a:packager.add('preservim/nerdtree')
   call a:packager.add('airblade/vim-rooter')
-  call a:packager.add('tpope/ctrlp')
-  call a:packager.add('itchyny/lightline')
+  call a:packager.add('kien/ctrlp.vim')
+  call a:packager.add('itchyny/lightline.vim')
   call a:packager.add('junegunn/fzf')
 endfunction
 
