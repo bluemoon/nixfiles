@@ -8,6 +8,15 @@
   # paths it should manage.
   home.username = "bradfordtoney";
   home.homeDirectory = "/Users/bradfordtoney";
+  home.sessionVariables = {
+    EDITOR = "nvim";
+  };
+
+  programs.direnv = {
+    enable = true;
+    enableFishIntegration = true;
+    nix-direnv.enable = true;
+  };
 
   # Better ls
   programs.exa = {
@@ -19,6 +28,7 @@
   programs.fzf = {
     enable = true;
     enableZshIntegration = true;
+    enableFishIntegration = true;
   };
 
   # Enable ZSH
@@ -49,6 +59,26 @@
       vi = "nvim";
       vim = "nvim";
     };
+  };
+
+  
+  programs.fish = {
+    enable = true;
+    loginShellInit = ''
+      set -xg TERM xterm-256color
+      if test -e /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
+        fenv source /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
+      end
+      if test -e /nix/var/nix/profiles/default/etc/profile.d/nix.sh
+        fenv source /nix/var/nix/profiles/default/etc/profile.d/nix.sh
+      end
+      if test -e $HOME/.nix-profile/etc/profile.d/hm-session-vars.sh
+        fenv source $HOME/.nix-profile/etc/profile.d/hm-session-vars.sh
+      end
+
+      set -xg PATH $HOME/bin $HOME/.cargo/bin $PATH
+      set -xg PATH (yarn global bin) $PATH
+    '';
   };
 
   # Git config
