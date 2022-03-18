@@ -6,8 +6,8 @@
 
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
-  home.username = "bradfordtoney";
-  home.homeDirectory = "/Users/bradfordtoney";
+  home.username = "bradford";
+  home.homeDirectory = "/Users/bradford";
   home.sessionVariables = {
     EDITOR = "nvim";
   };
@@ -95,6 +95,11 @@
       st = "status";
     };
   };
+  xdg.configFile."nvim/init.lua".source = programs/neovim/init.lua;
+  xdg.configFile."nvim/lua/user/colorscheme.lua".source = programs/neovim/lua/user/colorscheme.lua;
+  xdg.configFile."nvim/lua/user/options.lua".source = programs/neovim/lua/user/options.lua;
+  xdg.configFile."nvim/lua/user/plugins.lua".source = programs/neovim/lua/user/plugins.lua;
+  xdg.configFile."nvim/lua/user/lsp.lua".source = programs/neovim/lua/user/lsp.lua;
 
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage
@@ -113,5 +118,16 @@
 
   home.packages = [
     pkgs.any-nix-shell
+    pkgs.direnv
+    pkgs.luajit
+    pkgs.nixfmt
+    pkgs.ripgrep
+    pkgs.ripgrep-all
+    pkgs.rnix-lsp
+    pkgs.rustup
+    pkgs.tree-sitter
+    pkgs.stylua
+    pkgs.sumneko-lua-language-server
+    pkgs.rust-analyzer
   ];
 }
