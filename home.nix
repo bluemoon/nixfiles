@@ -79,6 +79,11 @@
       set -xg PATH $HOME/bin $HOME/.cargo/bin $PATH
       set -xg PATH (yarn global bin) $PATH
     '';
+
+    interactiveShellInit = ''
+      eval (direnv hook fish)
+      any-nix-shell fish --info-right | source
+    '';
   };
 
   # Git config
@@ -106,4 +111,7 @@
   home.file.".yabairc".source = ./yabairc;
   home.file.".skhdrc".source = ./skhdrc;
 
+  home.packages = [
+    pkgs.any-nix-shell
+  ];
 }
