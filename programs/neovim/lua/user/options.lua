@@ -6,6 +6,9 @@ vim.opt.fileencoding = "utf-8"
 vim.opt.showtabline = 2                         -- always show tabs
 vim.opt.smartcase = true                        -- smart case
 vim.opt.smartindent = true                      -- make indenting smarter again
+vim.opt.number = true                           -- set number column width to 2 {default 4}
+vim.opt.numberwidth = 4                         -- set number column width to 2 {default 4}
+
 
 -- Tabs
 vim.opt.expandtab = true
