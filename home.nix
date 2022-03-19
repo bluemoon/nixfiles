@@ -100,6 +100,8 @@
   xdg.configFile."nvim/lua/user/options.lua".source = programs/neovim/lua/user/options.lua;
   xdg.configFile."nvim/lua/user/plugins.lua".source = programs/neovim/lua/user/plugins.lua;
   xdg.configFile."nvim/lua/user/lsp.lua".source = programs/neovim/lua/user/lsp.lua;
+  xdg.configFile."nvim/lua/user/keymaps.lua".source = programs/neovim/lua/user/keymaps.lua;
+  xdg.configFile."nvim/lua/user/nvim-tree.lua".source = programs/neovim/lua/user/nvim-tree.lua;
 
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage
