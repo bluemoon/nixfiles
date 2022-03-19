@@ -57,6 +57,8 @@ return packer.startup(function(use)
   use "tamago324/nlsp-settings.nvim" -- language server settings defined in json for
   use "jose-elias-alvarez/null-ls.nvim" -- for formatters and linters
   use "folke/lua-dev.nvim"
+  use "weilbith/nvim-code-action-menu"
+  use "kosayoda/nvim-lightbulb"
 
   -- CMP
   use 'hrsh7th/nvim-cmp' -- Autocompletion plugin
