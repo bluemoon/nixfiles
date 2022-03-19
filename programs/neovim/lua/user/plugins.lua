@@ -65,4 +65,17 @@ return packer.startup(function(use)
 
   -- Color Theme
   use "morhetz/gruvbox"
+
+  -- Languages
+  use 'LnL7/vim-nix'
+
+  -- Treesitter
+  use {
+    "nvim-treesitter/nvim-treesitter",
+    run = ":TSUpdate",
+  }
+  use "JoosepAlviste/nvim-ts-context-commentstring"
+
+  -- Git
+  use "lewis6991/gitsigns.nvim"
 end)
