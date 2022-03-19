@@ -43,10 +43,13 @@ return packer.startup(function(use)
   use "nvim-lua/popup.nvim" -- An implementation of the Popup API from vim in Neovim
   use "nvim-lua/plenary.nvim" -- Useful lua functions used ny lots of plugins
   use 'nvim-telescope/telescope.nvim' -- Fuzzy finder
-
   use "kyazdani42/nvim-web-devicons"
   use "kyazdani42/nvim-tree.lua"
   config = function() require'nvim-tree'.setup {} end
+  -- Color Theme
+  use "morhetz/gruvbox"
+  -- Languages
+  use 'LnL7/vim-nix'
 
   -- LSP
   use "neovim/nvim-lspconfig" -- enable LSP
@@ -63,11 +66,9 @@ return packer.startup(function(use)
   use "hrsh7th/cmp-cmdline" -- cmdline completions
   use "saadparwaiz1/cmp_luasnip" -- snippet completions
 
-  -- Color Theme
-  use "morhetz/gruvbox"
-
-  -- Languages
-  use 'LnL7/vim-nix'
+  -- snippets
+  use "L3MON4D3/LuaSnip" --snippet engine
+  use "rafamadriz/friendly-snippets" -- a bunch of snippets to use
 
   -- Treesitter
   use {
