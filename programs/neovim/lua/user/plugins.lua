@@ -44,6 +44,7 @@ return packer.startup(function(use)
   use "nvim-lua/plenary.nvim" -- Useful lua functions used ny lots of plugins
   use 'nvim-telescope/telescope.nvim' -- Fuzzy finder
   use "ahmedkhalf/project.nvim"
+  use "numToStr/Comment.nvim" -- Easily comment stuff
 
   use "kyazdani42/nvim-web-devicons"
   use "kyazdani42/nvim-tree.lua"
@@ -59,9 +60,8 @@ return packer.startup(function(use)
   use "tamago324/nlsp-settings.nvim" -- language server settings defined in json for
   use "jose-elias-alvarez/null-ls.nvim" -- for formatters and linters
   use "folke/lua-dev.nvim"
-  use "weilbith/nvim-code-action-menu"
-  use "kosayoda/nvim-lightbulb"
   use "lukas-reineke/lsp-format.nvim"
+  use "tami5/lspsaga.nvim"
 
   -- CMP
   use 'hrsh7th/nvim-cmp' -- Autocompletion plugin
