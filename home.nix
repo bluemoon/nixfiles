@@ -94,15 +94,15 @@
     aliases = {
       st = "status";
     };
+
+    extraConfig = {
+      core = {
+        editor = "nvim";
+      };
+    };
   };
   xdg.configFile."nvim/init.lua".source = programs/neovim/init.lua;
   xdg.configFile."nvim/lua/user".source = programs/neovim/lua/user;
-  #xdg.configFile."nvim/lua/user/colorscheme.lua".source = programs/neovim/lua/user/colorscheme.lua;
-  #xdg.configFile."nvim/lua/user/options.lua".source = programs/neovim/lua/user/options.lua;
-  #xdg.configFile."nvim/lua/user/plugins.lua".source = programs/neovim/lua/user/plugins.lua;
-  #xdg.configFile."nvim/lua/user/keymaps.lua".source = programs/neovim/lua/user/keymaps.lua;
-  #xdg.configFile."nvim/lua/user/nvim-tree.lua".source = programs/neovim/lua/user/nvim-tree.lua;
-  #xdg.configFile."nvim/lua/user/lsp".source = programs/neovim/lua/user/lsp;
 
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage
