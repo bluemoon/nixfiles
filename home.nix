@@ -18,6 +18,10 @@
     nix-direnv.enable = true;
   };
 
+  programs.bat = {
+    enable = true;
+  };
+
   # Better ls
   programs.exa = {
     enable = true;
@@ -84,6 +88,12 @@
       eval (direnv hook fish)
       any-nix-shell fish --info-right | source
     '';
+
+    shellAliases = {
+      cat = "bat";
+      vim = "nvim";
+    };
+
   };
 
   # Git config
