@@ -31,6 +31,9 @@ end
 
 -- Have packer use a popup window
 packer.init {
+  git = {
+    clone_timeout = false
+  },
   display = {
     open_fn = function()
       return require("packer.util").float { border = "rounded" }
@@ -51,6 +54,8 @@ return packer.startup(function(use)
   config = function() require'nvim-tree'.setup {} end
   -- Color Theme
   use "ellisonleao/gruvbox.nvim"
+  use "rebelot/kanagawa.nvim"
+
   -- Languages
   use 'LnL7/vim-nix'
 
