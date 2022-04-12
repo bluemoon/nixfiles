@@ -143,5 +143,6 @@
     pkgs.stylua
     pkgs.sumneko-lua-language-server
     pkgs.rust-analyzer
+    pkgs.zoxide
   ];
 }
