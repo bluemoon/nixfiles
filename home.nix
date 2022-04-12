@@ -42,7 +42,7 @@
     enableCompletion = true;
     enableAutosuggestions = true;
     initExtra = ''
-    export PATH=/Users/bradfordtoney/.cargo/bin:$HOME/go/bin:/usr/local/bin:/Users/bradfordtoney/.nix-profile/bin/:$PATH
+    export PATH=/Users/bradfordtoney/.cargo/bin:$HOME/go/bin:/usr/local/bin:/Users/bradfordtoney/.nix-profile/bin/:/home/bradford/.local/bin/:$PATH
     export PATH="$(yarn global bin):$PATH"
     eval "$(zoxide init zsh)"
     '';
@@ -80,7 +80,7 @@
         fenv source $HOME/.nix-profile/etc/profile.d/hm-session-vars.sh
       end
 
-      set -xg PATH $HOME/bin $HOME/.cargo/bin $PATH
+      set -xg PATH $HOME/bin $HOME/.cargo/bin $HOME/.local/bin $PATH
       set -xg PATH (yarn global bin) $PATH
     '';
 
@@ -132,6 +132,7 @@
   home.packages = [
     pkgs.any-nix-shell
     pkgs.direnv
+    pkgs.fd
     pkgs.luajit
     pkgs.nixfmt
     pkgs.ripgrep
