@@ -65,7 +65,7 @@
     };
   };
 
-  
+  # need fenv plugin
   programs.fish = {
     enable = true;
     loginShellInit = ''
@@ -80,7 +80,7 @@
         fenv source $HOME/.nix-profile/etc/profile.d/hm-session-vars.sh
       end
 
-      set -xg PATH $HOME/bin $HOME/.cargo/bin $HOME/.local/bin $PATH
+      set -xg PATH $HOME/bin $HOME/.cargo/bin $HOME/.local/bin /opt/homebrew/bin $PATH
       set -xg PATH (yarn global bin) $PATH
     '';
 
