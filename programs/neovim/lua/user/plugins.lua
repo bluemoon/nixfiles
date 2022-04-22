@@ -48,10 +48,11 @@ return packer.startup(function(use)
   use 'nvim-telescope/telescope.nvim' -- Fuzzy finder
   use "ahmedkhalf/project.nvim"
   use "numToStr/Comment.nvim" -- Easily comment stuff
+  use "akinsho/toggleterm.nvim"
 
   use "kyazdani42/nvim-web-devicons"
   use "kyazdani42/nvim-tree.lua"
-  config = function() require'nvim-tree'.setup {} end
+  config = function() require 'nvim-tree'.setup {} end
   -- Color Theme
   use "ellisonleao/gruvbox.nvim"
   use "rebelot/kanagawa.nvim"
