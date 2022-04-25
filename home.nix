@@ -111,5 +111,5 @@
     pkgs.zoxide
   ];
 
-  imports = [ ../home-manager/fish.nix ];
+  imports = [ home-manager/fish.nix ];
 }
