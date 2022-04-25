@@ -8,9 +8,7 @@
   # paths it should manage.
   home.username = "bradford";
   home.homeDirectory = "/Users/bradford";
-  home.sessionVariables = {
-    EDITOR = "nvim";
-  };
+  home.sessionVariables = { EDITOR = "nvim"; };
 
   programs.direnv = {
     enable = true;
@@ -18,9 +16,7 @@
     nix-direnv.enable = true;
   };
 
-  programs.bat = {
-    enable = true;
-  };
+  programs.bat = { enable = true; };
 
   # Better ls
   programs.exa = {
@@ -35,6 +31,17 @@
     enableFishIntegration = true;
   };
 
+  # ZOxide
+  programs.zoxide = {
+    enable = true;
+    enableFishIntegration = true;
+  };
+
+  programs.nix-index = {
+    enable = true;
+    enableFishIntegration = true;
+  };
+
   # Enable ZSH
   programs.zsh = {
     enable = true;
@@ -42,21 +49,14 @@
     enableCompletion = true;
     enableAutosuggestions = true;
     initExtra = ''
-    export PATH=/Users/bradfordtoney/.cargo/bin:$HOME/go/bin:/usr/local/bin:/Users/bradfordtoney/.nix-profile/bin/:/home/bradford/.local/bin/:$PATH
-    export PATH="$(yarn global bin):$PATH"
-    eval "$(zoxide init zsh)"
+      export PATH=/Users/bradfordtoney/.cargo/bin:$HOME/go/bin:/usr/local/bin:/Users/bradfordtoney/.nix-profile/bin/:/home/bradford/.local/bin/:$PATH
+      export PATH="$(yarn global bin):$PATH"
+      eval "$(zoxide init zsh)"
     '';
     oh-my-zsh = {
       enable = true;
       theme = "robbyrussell";
-      plugins = [
-        "command-not-found"
-        "git"
-        "history"
-        "sudo"
-        "fzf"
-        "dotenv"
-      ];
+      plugins = [ "command-not-found" "git" "history" "sudo" "fzf" "dotenv" ];
     };
     shellAliases = {
       k = "kubectl";
@@ -93,23 +93,26 @@
       cat = "bat";
       vim = "nvim";
     };
-
   };
+
+  programs.fish.plugins = [{
+    name = "fenv";
+    src = pkgs.fetchFromGitHub {
+      owner = "oh-my-fish";
+      repo = "plugin-foreign-env";
+      rev = "b3dd471bcc885b597c3922e4de836e06415e52dd";
+      sha256 = "sha256-3h03WQrBZmTXZLkQh1oVyhv6zlyYsSDS7HTHr+7WjY8=";
+    };
+  }];
 
   # Git config
   programs.git = {
     enable = true;
     userName = "Bradford Toney";
     userEmail = "bradford.toney@gmail.com";
-    aliases = {
-      st = "status";
-    };
+    aliases = { st = "status"; };
 
-    extraConfig = {
-      core = {
-        editor = "nvim";
-      };
-    };
+    extraConfig = { core = { editor = "nvim"; }; };
   };
   xdg.configFile."nvim/init.lua".source = programs/neovim/init.lua;
   xdg.configFile."nvim/lua/user".source = programs/neovim/lua/user;
@@ -133,8 +136,10 @@
     pkgs.any-nix-shell
     pkgs.direnv
     pkgs.fd
+    pkgs.htop
     pkgs.luajit
     pkgs.nixfmt
+    pkgs.nix-prefetch
     pkgs.ripgrep
     pkgs.ripgrep-all
     pkgs.rnix-lsp
