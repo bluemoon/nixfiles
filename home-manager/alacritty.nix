@@ -31,12 +31,13 @@
 
       font = let fontname = "Iosevka Nerd Font Mono"; in
         {
-          #font = let fontname = "Recursive Mono Linear Static"; in { # TODO fix this font with nerd font
-          normal = { family = fontname; };
-          # bold = { family = fontname; style = "Bold"; };
-          # italic = { family = fontname; style = "Semibold Italic"; };
+          normal = {
+            family = fontname;
+            style = "Regular";
+          };
           size = 12;
         };
+
       cursor.style = "Block";
 
       colors = {

@@ -16,15 +16,14 @@
       fish_add_path $HOME/bin
       fish_add_path -m $HOME/.local/bin
       fish_add_path -m $HOME/.cargo/bin
-
-      # Do i need this?
-      set -xg NIX_PATH $HOME/.nix-defexpr/channels
+      fish_add_path $HOME/Library/Application Support/Coursier/bin
 
       set -xg PATH $HOME/bin /opt/homebrew/bin $PATH
       set -xg PATH (yarn global bin) $PATH
     '';
 
     interactiveShellInit = ''
+      set -xg NIX_PATH $HOME/.nix-defexpr/channels:/nix/var/nix/profiles/per-user/root/channels
       eval (direnv hook fish)
       any-nix-shell fish --info-right | source
     '';

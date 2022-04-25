@@ -59,6 +59,7 @@ return packer.startup(function(use)
 
   -- Languages
   use 'LnL7/vim-nix'
+  use({'scalameta/nvim-metals', requires = { "nvim-lua/plenary.nvim" }})
 
   -- LSP
   use "neovim/nvim-lspconfig" -- enable LSP
