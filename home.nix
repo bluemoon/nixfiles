@@ -111,5 +111,5 @@
     pkgs.zoxide
   ];
 
-  imports = [ home-manager/fish.nix home-manager/tmux.nix ];
+  imports = [ home-manager/fish.nix home-manager/tmux.nix home-manager/alacritty.nix ];
 }
