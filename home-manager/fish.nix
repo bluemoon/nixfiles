@@ -25,6 +25,7 @@
     interactiveShellInit = ''
       set -xg NIX_PATH $HOME/.nix-defexpr/channels:/nix/var/nix/profiles/per-user/root/channels
       eval (direnv hook fish)
+      eval (zoxide init fish)
       any-nix-shell fish --info-right | source
     '';
 
