@@ -13,6 +13,7 @@
         padding = { x = 5; y = 5; };
       };
 
+
       scrolling = {
         history = 10000;
         multiplier = 3;
@@ -29,7 +30,7 @@
         }
       ];
 
-      font = let fontname = "Iosevka Nerd Font Mono"; in
+      font = let fontname = "Pragmata Pro Mono"; in
         {
           normal = {
             family = fontname;

@@ -10,11 +10,12 @@
   home.homeDirectory = "/Users/bradford";
   home.sessionVariables = { EDITOR = "nvim"; };
 
-  programs.direnv = {
-    enable = true;
-    enableFishIntegration = true;
-    nix-direnv.enable = true;
-  };
+  # programs.direnv = {
+  #   enable = true;
+  #   enableFishIntegration = true;
+  #   nix-direnv.enable = true;
+  # };
+
 
   programs.bat = { enable = true; };
 
@@ -56,7 +57,7 @@
     oh-my-zsh = {
       enable = true;
       theme = "robbyrussell";
-      plugins = [ "command-not-found" "git" "history" "sudo" "fzf" "dotenv" ];
+      # plugins = [ "command-not-found" "git" "history" "sudo" "fzf" "dotenv" ];
     };
     shellAliases = {
       k = "kubectl";
