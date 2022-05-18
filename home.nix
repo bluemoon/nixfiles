@@ -72,7 +72,10 @@
     userEmail = "bradford.toney@gmail.com";
     aliases = { st = "status"; };
 
-    extraConfig = { core = { editor = "nvim"; }; };
+    extraConfig = {
+      core = { editor = "nvim"; };
+      url."ssh://git@github.com/".insteadOf = "https://github.com/";
+    };
   };
   xdg.configFile."nvim/init.lua".source = programs/neovim/init.lua;
   xdg.configFile."nvim/lua/user".source = programs/neovim/lua/user;
