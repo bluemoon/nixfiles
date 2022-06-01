@@ -17,7 +17,7 @@
     nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager
     nix-channel --add https://nixos.org/channels/nixpkgs-unstable nixpkgs-unstable
     nix-channel --update
-    export NIX_PATH=$HOME/.nix-defexpr/channels${NIX_PATH:+:}$NIX_PATH
+    export NIX_PATH=${NIX_PATH:+$NIX_PATH:}$HOME/.nix-defexpr/channels:/nix/var/nix/profiles/per-user/root/channels    
     ```
 1. Install home-manager
     ```
