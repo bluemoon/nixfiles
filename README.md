@@ -35,10 +35,10 @@
     git clone git@github.com:bluemoon/nixfiles.git ~/.config/nixpkgs
     ```
 1. Install the flake
-```
-nix build ~/nix-darwin-dotfiles\#darwinConfigurations.shaunsingh-laptop.system --extra-experimental-features nix-command --extra-experimental-features flakes
-    ./result/sw/bin/darwin-rebuild switch --flake .#shaunsingh-laptop
-```
+    ```
+    nix build ~/.config/nixpkgs\#darwinConfigurations.bradford-mbp.system
+    ./result/sw/bin/darwin-rebuild switch --flake .#bradford-mbp
+    ```
 1. Setup home-manager configuration (install and configure programs)
     ```
     home-manager switch
