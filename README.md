@@ -23,7 +23,13 @@
     ```
     nix-shell '<home-manager>' -A install
     ```
-1. Clone this repo inside `~/.config/nixpkgs` (must remove default nixpkgs before cloning)
+1. Install nix-darwin
+
+    ```
+    nix-build https://github.com/LnL7/nix-darwin/archive/master.tar.gz -A installer
+    ./result/bin/darwin-installer
+    ```
+3. Clone this repo inside `~/.config/nixpkgs` (must remove default nixpkgs before cloning)
     ```
     rm -r ~/.config/nixpkgs
     git clone git@github.com:bluemoon/nixfiles.git ~/.config/nixpkgs
