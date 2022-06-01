@@ -11,4 +11,8 @@ nix = {
 };
 programs.fish.enable = true;
 environment.shells = with pkgs; [ fish ];
+users.users.bradford = {
+  home = "/Users/bradford";
+  shell = pkgs.fish;
+};
 }
