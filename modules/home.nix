@@ -101,6 +101,7 @@
     pkgs.fd
     pkgs.htop
     pkgs.luajit
+    pkgs.nodejs
     pkgs.nixfmt
     pkgs.nix-prefetch
     pkgs.ripgrep
