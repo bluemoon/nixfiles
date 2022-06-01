@@ -51,11 +51,11 @@
     };
   };
   outputs = { self, nixpkgs, darwin, home-manager, ... }@inputs: {
-    darwinConfigurations."Bradfords-MBP" = darwin.lib.darwinSystem {
+    darwinConfigurations."bradford-mbp" = darwin.lib.darwinSystem {
       system = "aarch64-darwin";
       modules = [
         # ./modules/mac.nix
-        # ./modules/pam.nix
+        ./modules/pam.nix
         home-manager.darwinModule
         {
           home-manager = {
