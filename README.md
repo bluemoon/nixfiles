@@ -53,5 +53,5 @@
 
 ---
 
-# References
+## References
 1. https://github.com/shaunsingh/nix-darwin-dotfiles/blob/main/nix-config.org
