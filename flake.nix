@@ -5,6 +5,9 @@
     # All packages should follow latest nixpkgs/nur
     unstable.url = "github:nixos/nixpkgs/master";
     nur.url = "github:nix-community/NUR";
+    pragmata-pro = {
+      url = "./pkgs/pragmata-pro/";
+    };
     # Nix-Darwin
     darwin = {
       url = "github:LnL7/nix-darwin";
@@ -78,8 +81,6 @@
               nur.overlay
               neovim-overlay.overlay
               (final: prev: {
-                pragmata-pro = pkgs.callPackage ./pkgs/pragmata-pro { };
-                # nyxt = pkgs.callPackage ./pkgs/nyxt { };
                 # yabai is broken on macOS 12, so lets make a smol overlay to use the master version
                 yabai = let
                   version = "4.0.0-dev";
