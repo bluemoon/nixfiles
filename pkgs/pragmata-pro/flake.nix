@@ -1,5 +1,10 @@
 {
-  outputs = { self, nixpkgs }: {
+  inputs.flake-compat = {
+    url = "github:edolstra/flake-compat";
+    flake = false;
+  };
+
+  outputs = { self, nixpkgs, ... }: {
     packages.aarch64-darwin.pragmata-pro = let
       pkgs = import nixpkgs { system = "aarch64-darwin"; };
     in pkgs.stdenv.mkDerivation {
@@ -22,5 +27,10 @@
     };
 
     defaultPackage.aarch64-darwin = self.packages.aarch64-darwin.pragmata-pro;
+    overlay = final: prev: {
+      pragmata-pro = import ./default.nix {
+        pkgs = prev;
+      };
+    };
   };
 }
