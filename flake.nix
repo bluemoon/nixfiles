@@ -78,7 +78,7 @@
               nur.overlay
               neovim-overlay.overlay
               (final: prev: {
-                # sf-mono-liga-bin = pkgs.callPackage ./pkgs/sf-mono-liga-bin { };
+                pragmata-pro = pkgs.callPackage ./pkgs/pragmata-pro { };
                 # nyxt = pkgs.callPackage ./pkgs/nyxt { };
                 # yabai is broken on macOS 12, so lets make a smol overlay to use the master version
                 yabai = let
