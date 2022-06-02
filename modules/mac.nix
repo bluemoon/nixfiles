@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }: {
+{ config, pkgs, lib, self, ... }: {
 
   nix = {
     package = pkgs.nix;
@@ -19,10 +19,10 @@
 
   system.activationScripts.postActivation.text = ''
     # Set the default shell as fish for the user. MacOS doesn't do this like nixOS does
-    sudo chsh -s ${lib.getBin pkgs.fish}/bin/fish bradford 
+    sudo chsh -s ${lib.getBin pkgs.fish}/bin/fish bradford
   '';
 
-  
+
   services.yabai = {
     enable = true;
     enableScriptingAddition = true;
@@ -118,7 +118,7 @@
     fontDir.enable = true;
     fonts = with pkgs; [
       ibm-plex
-      pragmata-pro
+      self.packages.${pkgs.system}.pragmata-pro
     ];
   };
   # Remap caps lock to escape

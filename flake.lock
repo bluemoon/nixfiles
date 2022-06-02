@@ -166,22 +166,6 @@
         "type": "github"
       }
     },
-    "flake-compat_4": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1650374568,
-        "narHash": "sha256-Z+s0J8/r907g149rllvwhb4pKi8Wam5ij0st8PwAh+E=",
-        "owner": "edolstra",
-        "repo": "flake-compat",
-        "rev": "b4a34015c698c7793d592d66adbab377907a2be8",
-        "type": "github"
-      },
-      "original": {
-        "owner": "edolstra",
-        "repo": "flake-compat",
-        "type": "github"
-      }
-    },
     "flake-utils": {
       "locked": {
         "lastModified": 1634851050,
@@ -396,20 +380,6 @@
         "type": "indirect"
       }
     },
-    "nixpkgs_3": {
-      "locked": {
-        "lastModified": 1654007547,
-        "narHash": "sha256-G812EeXZeGeGjkAvbTleGwcKFCGxdLOQb9aViOWASPc=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "5643714dea562f0161529ab23058562afeff46d0",
-        "type": "github"
-      },
-      "original": {
-        "id": "nixpkgs",
-        "type": "indirect"
-      }
-    },
     "nur": {
       "locked": {
         "lastModified": 1654123271,
@@ -425,22 +395,6 @@
         "type": "github"
       }
     },
-    "pragmata-pro": {
-      "inputs": {
-        "flake-compat": "flake-compat_4",
-        "nixpkgs": "nixpkgs_3"
-      },
-      "locked": {
-        "lastModified": 1,
-        "narHash": "sha256-Rn//xljZnkuHlR+U+RueOvZahn7lpVAGrliLgyqQz0Q=",
-        "path": "/nix/store/9sjrar9sbf5gxsxa9gzk8ci0di7isl6x-source/pkgs/pragmata-pro",
-        "type": "path"
-      },
-      "original": {
-        "path": "/nix/store/9sjrar9sbf5gxsxa9gzk8ci0di7isl6x-source/pkgs/pragmata-pro",
-        "type": "path"
-      }
-    },
     "root": {
       "inputs": {
         "base16": "base16",
@@ -452,7 +406,6 @@
         "nixpkgs": "nixpkgs_2",
         "nixpkgs-wayland": "nixpkgs-wayland",
         "nur": "nur",
-        "pragmata-pro": "pragmata-pro",
         "sway-borders-src": "sway-borders-src",
         "unstable": "unstable",
         "yabai-src": "yabai-src"
