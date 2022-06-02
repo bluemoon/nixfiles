@@ -5,9 +5,6 @@
     # All packages should follow latest nixpkgs/nur
     unstable.url = "github:nixos/nixpkgs/master";
     nur.url = "github:nix-community/NUR";
-    pragmata-pro = {
-      url = "./pkgs/pragmata-pro/";
-    };
     # Nix-Darwin
     darwin = {
       url = "github:LnL7/nix-darwin";
@@ -53,9 +50,18 @@
       inputs.nixpkgs.follows = "unstable";
     };
   };
-  outputs = { self, nixpkgs, darwin, home-manager, ... }@inputs: {
+  outputs = { self, nixpkgs, darwin, home-manager, ... }@inputs: let
+    pkgs = nixpkgs.legacyPackages."aarch64-darwin";
+  in {
+    packages."aarch64-darwin" = {
+      pragmata-pro = pkgs.callPackage ./pkgs/pragmata-pro {};
+    };
+
     darwinConfigurations."bradford-mbp" = darwin.lib.darwinSystem {
       system = "aarch64-darwin";
+      specialArgs = {
+        inherit self inputs;
+      };
       modules = [
         ./modules/mac.nix
         ./modules/pam.nix
@@ -80,7 +86,6 @@
             overlays = with inputs; [
               nur.overlay
               neovim-overlay.overlay
-              pragmata-pro.overlay
               (final: prev: {
                 # yabai is broken on macOS 12, so lets make a smol overlay to use the master version
                 yabai = let
