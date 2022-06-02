@@ -21,7 +21,13 @@
     # Set the default shell as fish for the user. MacOS doesn't do this like nixOS does
     sudo chsh -s ${lib.getBin pkgs.fish}/bin/fish bradford 
   '';
-
+  fonts = {
+    fontDir.enable = true;
+    fonts = with pkgs; [
+      ibm-plex
+      pragmata-pro
+    ];
+  };
   # Remap caps lock to escape
   system.keyboard = {
     enableKeyMapping = true;
