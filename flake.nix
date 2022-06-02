@@ -80,6 +80,7 @@
             overlays = with inputs; [
               nur.overlay
               neovim-overlay.overlay
+              pragmata-pro.overlay
               (final: prev: {
                 # yabai is broken on macOS 12, so lets make a smol overlay to use the master version
                 yabai = let

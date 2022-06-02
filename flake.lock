@@ -433,11 +433,11 @@
       "locked": {
         "lastModified": 1,
         "narHash": "sha256-Rn//xljZnkuHlR+U+RueOvZahn7lpVAGrliLgyqQz0Q=",
-        "path": "/nix/store/rgbn7sny8ml5vr9s3mq4v25rijbgxfq6-source/pkgs/pragmata-pro",
+        "path": "/nix/store/9sjrar9sbf5gxsxa9gzk8ci0di7isl6x-source/pkgs/pragmata-pro",
         "type": "path"
       },
       "original": {
-        "path": "/nix/store/rgbn7sny8ml5vr9s3mq4v25rijbgxfq6-source/pkgs/pragmata-pro",
+        "path": "/nix/store/9sjrar9sbf5gxsxa9gzk8ci0di7isl6x-source/pkgs/pragmata-pro",
         "type": "path"
       }
     },
