@@ -118,7 +118,7 @@
     fontDir.enable = true;
     fonts = with pkgs; [
       ibm-plex
-      # pragmata-pro
+      pragmata-pro
     ];
   };
   # Remap caps lock to escape
