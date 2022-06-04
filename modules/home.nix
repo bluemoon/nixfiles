@@ -65,6 +65,7 @@
       vim = "nvim";
     };
   };
+
   # Git config
   programs.git = {
     enable = true;
@@ -74,7 +75,9 @@
 
     extraConfig = {
       core = { editor = "nvim"; };
-      url."ssh://git@github.com/".insteadOf = "https://github.com/";
+      # TODO: Breaks Cargo?
+      # url."ssh://git@github.com/".insteadOf = "https://github.com/";
+      pull.rebase = true;
     };
   };
   xdg.configFile."nvim/init.lua".source = ../programs/neovim/init.lua;
