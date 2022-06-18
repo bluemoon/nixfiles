@@ -30,7 +30,7 @@
         }
       ];
 
-      font = let fontname = "Pragmata Pro Mono"; in
+      font = let fontname = "Pragmata Pro Mono Liga"; in
         {
           normal = {
             family = fontname;
