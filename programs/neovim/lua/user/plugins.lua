@@ -69,6 +69,7 @@ return packer.startup(function(use)
   use "folke/lua-dev.nvim"
   use "lukas-reineke/lsp-format.nvim"
   use "tami5/lspsaga.nvim"
+  use "MunifTanjim/prettier.nvim"
 
   -- CMP
   use 'hrsh7th/nvim-cmp' -- Autocompletion plugin

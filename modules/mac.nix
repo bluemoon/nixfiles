@@ -136,6 +136,7 @@
       orientation = "left";
     };
     NSGlobalDomain = {
+      AppleFontSmoothing = 1;
       # AppleKeyboardUIMode = 3;
       # ApplePressAndHoldEnabled = false;
       # AppleFontSmoothing = 1;
