@@ -5,3 +5,4 @@ end
 
 require "user.lsp.installer"
 require("user.lsp.handlers").setup()
+-- require "user.lsp.lsp-prettier"
