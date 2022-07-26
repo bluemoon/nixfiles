@@ -78,6 +78,7 @@
       # TODO: Breaks Cargo?
       # url."ssh://git@github.com/".insteadOf = "https://github.com/";
       pull.rebase = true;
+      push.autoSetupRemote = true;
     };
   };
   xdg.configFile."nvim/init.lua".source = ../programs/neovim/init.lua;
