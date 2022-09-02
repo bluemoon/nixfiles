@@ -34,6 +34,11 @@
     rm -r ~/.config/nixpkgs
     git clone git@github.com:bluemoon/nixfiles.git ~/.config/nixpkgs
     ```
+1. Install the flake
+    ```
+    nix build ~/.config/nixpkgs\#darwinConfigurations.bradford-mbp.system
+    ./result/sw/bin/darwin-rebuild switch --flake .#bradford-mbp
+    ```
 1. Setup home-manager configuration (install and configure programs)
     ```
     home-manager switch
