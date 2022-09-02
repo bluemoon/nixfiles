@@ -1,3 +1,5 @@
+local o = vim.opt
+
 -- Leader
 vim.g.mapleader = ","
 
@@ -20,3 +22,9 @@ vim.opt.expandtab = true
 vim.opt.shiftwidth = 2
 vim.opt.tabstop = 2
 vim.opt.copyindent = true
+
+-- Remove builtin plugins
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+vim.g.loaded_zipPlugin = 1
+vim.g.loaded_zip = 1
