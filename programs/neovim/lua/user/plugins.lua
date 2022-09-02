@@ -69,6 +69,7 @@ return packer.startup(function(use)
   use "folke/lua-dev.nvim"
   use "lukas-reineke/lsp-format.nvim"
   use "tami5/lspsaga.nvim"
+  use "MunifTanjim/prettier.nvim"
 
   -- CMP
   use 'hrsh7th/nvim-cmp' -- Autocompletion plugin
@@ -83,11 +84,11 @@ return packer.startup(function(use)
   use "rafamadriz/friendly-snippets" -- a bunch of snippets to use
 
   -- Treesitter
-  use {
-    "nvim-treesitter/nvim-treesitter",
-    run = ":TSUpdate",
-  }
-  use "JoosepAlviste/nvim-ts-context-commentstring"
+  -- use {
+  --   "nvim-treesitter/nvim-treesitter",
+  --   run = ":TSUpdate",
+  -- }
+  -- use "JoosepAlviste/nvim-ts-context-commentstring"
 
   -- Git
   use "lewis6991/gitsigns.nvim"

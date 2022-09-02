@@ -1,20 +1,20 @@
-{ config, pkgs, ... }:
+{ config, pkgs, home-manager, ... }:
 
 {
   # Let Home Manager install and manage itself.
-  programs.home-manager.enable = true;
+  #programs.home-manager.enable = true;
 
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
-  home.username = "bradford";
-  home.homeDirectory = "/Users/bradford";
+  # home.username = "bradford";
+  # home.homeDirectory = "/Users/bradford";
   home.sessionVariables = { EDITOR = "nvim"; };
-
-  # programs.direnv = {
-  #   enable = true;
-  #   enableFishIntegration = true;
-  #   nix-direnv.enable = true;
-  # };
+  #
+  programs.direnv = {
+    enable = true;
+    # enableFishIntegration = true;
+    nix-direnv.enable = true;
+  };
 
 
   programs.bat = { enable = true; };
@@ -65,6 +65,7 @@
       vim = "nvim";
     };
   };
+
   # Git config
   programs.git = {
     enable = true;
@@ -74,11 +75,14 @@
 
     extraConfig = {
       core = { editor = "nvim"; };
-      url."ssh://git@github.com/".insteadOf = "https://github.com/";
+      # TODO: Breaks Cargo?
+      # url."ssh://git@github.com/".insteadOf = "https://github.com/";
+      pull.rebase = true;
+      push.autoSetupRemote = true;
     };
   };
-  xdg.configFile."nvim/init.lua".source = programs/neovim/init.lua;
-  xdg.configFile."nvim/lua/user".source = programs/neovim/lua/user;
+  xdg.configFile."nvim/init.lua".source = ../programs/neovim/init.lua;
+  xdg.configFile."nvim/lua/user".source = ../programs/neovim/lua/user;
 
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage
@@ -90,17 +94,16 @@
   # changes in each release.
   home.stateVersion = "21.11";
 
-  # For VIM
-  home.file.".vimrc".source = ./vimrc;
-  home.file.".yabairc".source = ./yabairc;
-  home.file.".skhdrc".source = ./skhdrc;
+  # home.file.".yabairc".source = ../programs/yabai/yabairc;
+  # home.file.".skhdrc".source = ..programs/skhd/skhdrc;
 
   home.packages = [
     pkgs.any-nix-shell
-    pkgs.direnv
+    # pkgs.direnv
     pkgs.fd
     pkgs.htop
     pkgs.luajit
+    pkgs.nodejs
     pkgs.nixfmt
     pkgs.nix-prefetch
     pkgs.ripgrep
@@ -113,6 +116,7 @@
     pkgs.sumneko-lua-language-server
     pkgs.rust-analyzer
     pkgs.zoxide
+    pkgs.yarn
   ];
 
   imports = [ home-manager/fish.nix home-manager/tmux.nix home-manager/alacritty.nix ];
