@@ -2,7 +2,6 @@ local function conf(name)
   return require(string.format('modules.config.%s', name))
 end
 
-
 local plugins = {
   { -- Colorschemes
     'rebelot/kanagawa.nvim',
@@ -24,6 +23,10 @@ local plugins = {
   { -- Icons
     'kyazdani42/nvim-web-devicons',
     config = conf 'nvim-web-devicons',
+  },
+  { -- Tree
+    'kyazdani42/nvim-tree.lua',
+    config = conf 'nvim-tree',
   },
   { -- Lsp
     'neovim/nvim-lspconfig',
