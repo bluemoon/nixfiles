@@ -1,5 +1,5 @@
 local function conf(name)
-  return require(string.format('modules.config.%s', name))
+  return safe_require(string.format('modules.config.%s', name))
 end
 
 local plugins = {
@@ -27,6 +27,7 @@ local plugins = {
   { -- Tree
     'kyazdani42/nvim-tree.lua',
     config = conf 'nvim-tree',
+    cmd = 'NvimTreeFocus',
   },
   { -- Lsp
     'neovim/nvim-lspconfig',
@@ -39,6 +40,10 @@ local plugins = {
       'jose-elias-alvarez/nvim-lsp-ts-utils',
       'RRethy/vim-illuminate',
       'simrat39/rust-tools.nvim',
+      {
+        'weilbith/nvim-code-action-menu',
+        cmd = 'CodeActionMenu',
+      },
     },
   },
   { -- Autocompletion plugin
