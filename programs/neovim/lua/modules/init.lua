@@ -1,5 +1,5 @@
 local function conf(name)
-  return safe_require(string.format('modules.config.%s', name))
+  return require(string.format('modules.config.%s', name))
 end
 
 
