@@ -3,10 +3,15 @@ local function conf(name)
 end
 
 local plugins = {
-  { -- Colorschemes
+  -- Colorschemes
+  {
+    'catppuccin/nvim',
+    as = 'catppuccin',
+    config = conf 'catppuccin',
+  },
+  {
     'rebelot/kanagawa.nvim',
     as = 'kanagawa',
-    -- config = conf 'catppuccin',
   },
   { -- Treesiter
     'nvim-treesitter/nvim-treesitter',
@@ -15,7 +20,15 @@ local plugins = {
   { -- Finder
     'nvim-telescope/telescope.nvim',
     config = conf 'telescope',
-    requires = { 'nvim-lua/plenary.nvim' },
+    requires = {
+      'nvim-lua/plenary.nvim',
+      {
+        'ahmedkhalf/project.nvim',
+        config = function()
+          require('project_nvim').setup {}
+        end,
+      },
+    },
   },
   { -- Illuminate
     'RRethy/vim-illuminate',
@@ -27,7 +40,6 @@ local plugins = {
   { -- Tree
     'kyazdani42/nvim-tree.lua',
     config = conf 'nvim-tree',
-    cmd = 'NvimTreeFocus',
   },
   { -- Lsp
     'neovim/nvim-lspconfig',
