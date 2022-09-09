@@ -1,6 +1,6 @@
 local opt = vim.opt
 
--- Context [[ 
+-- Context [[
 opt.number = true -- bool: Show line numbers
 opt.relativenumber = true -- bool: Show relative line numbers
 opt.scrolloff = 4 -- int:  Min num lines of context
@@ -14,7 +14,7 @@ opt.wrap = false
 --vim.g.loaded_zipPlugin = 1
 --vim.g.loaded_zip = 1
 -- Leader
-vim.g.mapleader = ","
+vim.g.mapleader = ','
 -- ]]
 
 -- [[ Theme ]]
@@ -55,7 +55,7 @@ opt.listchars:append 'eol:↴'
 opt.updatetime = 300
 opt.timeoutlen = 500
 
-opt.autochdir = true
+opt.autochdir = false
 
 opt.mouse = 'a'
 

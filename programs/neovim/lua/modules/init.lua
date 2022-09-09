@@ -56,6 +56,12 @@ local plugins = {
         'weilbith/nvim-code-action-menu',
         cmd = 'CodeActionMenu',
       },
+
+      {
+        'glepnir/lspsaga.nvim',
+        branch = 'main',
+        conf 'lspsaga',
+      },
     },
   },
   { -- Autocompletion plugin
