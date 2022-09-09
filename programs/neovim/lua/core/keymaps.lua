@@ -54,3 +54,7 @@ vim.api.nvim_set_keymap(
   "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true, hint_offset = 1 })<cr>",
   {}
 )
+-- Code action
+vim.keymap.set({ 'n', 'v' }, '<leader>ca', '<cmd>Lspsaga code_action<CR>', { silent = true })
+-- Rename
+vim.keymap.set('n', 'gr', '<cmd>Lspsaga rename<CR>', { silent = true })
