@@ -60,7 +60,7 @@ local plugins = {
       {
         'glepnir/lspsaga.nvim',
         branch = 'main',
-        conf 'lspsaga',
+        config = conf 'lspsaga',
       },
     },
   },
