@@ -121,6 +121,11 @@ local plugins = {
     'Pocco81/auto-save.nvim',
     config = conf 'auto-save',
   },
+  {
+    'nvim-neorg/neorg',
+    config = conf 'neorg',
+    requires = 'nvim-lua/plenary.nvim',
+  },
 }
 
 local install_path = vim.fn.stdpath 'data' .. '/site/pack/packer/start/packer.nvim'

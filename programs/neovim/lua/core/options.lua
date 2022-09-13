@@ -50,7 +50,7 @@ opt.directory = cache_prefix .. '.swp/'
 
 opt.list = true
 opt.listchars:append 'space:⋅'
-opt.listchars:append 'eol:↴'
+--opt.listchars:append 'eol:↴'
 
 opt.updatetime = 300
 opt.timeoutlen = 500
