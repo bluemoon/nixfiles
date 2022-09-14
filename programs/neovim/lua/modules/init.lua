@@ -9,10 +9,6 @@ local plugins = {
     as = 'catppuccin',
     config = conf 'catppuccin',
   },
-  {
-    'rebelot/kanagawa.nvim',
-    as = 'kanagawa',
-  },
   { -- Treesiter
     'nvim-treesitter/nvim-treesitter',
     config = conf 'nvim-treesitter',
@@ -53,11 +49,6 @@ local plugins = {
       'RRethy/vim-illuminate',
       'simrat39/rust-tools.nvim',
       {
-        'weilbith/nvim-code-action-menu',
-        cmd = 'CodeActionMenu',
-      },
-
-      {
         'glepnir/lspsaga.nvim',
         branch = 'main',
         config = conf 'lspsaga',
@@ -92,6 +83,11 @@ local plugins = {
       },
     },
   },
+  {
+    'nvim-neorg/neorg',
+    config = conf 'neorg',
+    requires = { 'nvim-lua/plenary.nvim' },
+  },
   { -- Git related
     'lewis6991/gitsigns.nvim',
     config = conf 'gitsigns',
@@ -109,10 +105,6 @@ local plugins = {
     'phaazon/hop.nvim',
     config = conf 'hop',
   },
-  { -- Tmux
-    'aserowy/tmux.nvim',
-    config = conf 'tmux',
-  },
   { -- Highlight current line number
     'yamatsum/nvim-cursorline',
     config = conf 'nvim-cursorline',
@@ -120,11 +112,6 @@ local plugins = {
   { -- Autosave
     'Pocco81/auto-save.nvim',
     config = conf 'auto-save',
-  },
-  {
-    'nvim-neorg/neorg',
-    config = conf 'neorg',
-    requires = 'nvim-lua/plenary.nvim',
   },
 }
 

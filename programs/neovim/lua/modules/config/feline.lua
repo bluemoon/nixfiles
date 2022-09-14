@@ -1,8 +1,13 @@
 return function()
+  local ctp_feline = safe_require 'catppuccin.groups.integrations.feline'
   local feline = safe_require 'feline'
-  local ctp_feline = require 'catppuccin.groups.integrations.feline'
 
-  ctp_feline.setup()
+  if not ctp_feline or not feline then
+    return
+  end
+
+  ctp_feline.setup {}
+
   feline.setup {
     components = ctp_feline.get(),
   }
