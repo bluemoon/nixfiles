@@ -14,11 +14,11 @@ return function()
         },
       },
     },
-    ['core.norg.concealer'] = {
-      config = {
-        icon_preset = 'varied',
-        markup_preset = 'safe',
-      },
-    },
+    --['core.norg.concealer'] = {
+    --  config = {
+    --    icon_preset = 'varied',
+    --    markup_preset = 'safe',
+    --  },
+    --},
   }
 end

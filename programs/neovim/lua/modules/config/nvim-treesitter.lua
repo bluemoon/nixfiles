@@ -5,7 +5,7 @@ return function()
   end
 
   treesitter.setup {
-    ensure_installed = { 'lua', 'rust', 'toml', 'javascript' },
+    ensure_installed = { 'lua', 'rust', 'toml', 'javascript', 'norg' },
     highlight = {
       enable = true, -- false will disable the whole extension
       -- disable = { 'json' }, -- list of language that will be disabled

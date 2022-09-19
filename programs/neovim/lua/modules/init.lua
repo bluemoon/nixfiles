@@ -37,6 +37,14 @@ local plugins = {
     'kyazdani42/nvim-tree.lua',
     config = conf 'nvim-tree',
   },
+  { --Comment
+    'numToStr/Comment.nvim',
+    config = conf 'comment',
+    --requires = {
+    --  'JoosepAlviste/nvim-ts-context-commentstring',
+    --  config = conf 'context-commentstring',
+    --},
+  },
   { -- Lsp
     'neovim/nvim-lspconfig',
     config = conf 'lsp',
@@ -82,11 +90,6 @@ local plugins = {
         },
       },
     },
-  },
-  {
-    'nvim-neorg/neorg',
-    config = conf 'neorg',
-    requires = { 'nvim-lua/plenary.nvim' },
   },
   { -- Git related
     'lewis6991/gitsigns.nvim',
