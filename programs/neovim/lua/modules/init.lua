@@ -33,17 +33,13 @@ local plugins = {
     'kyazdani42/nvim-web-devicons',
     config = conf 'nvim-web-devicons',
   },
-  { -- Tree
-    'kyazdani42/nvim-tree.lua',
-    config = conf 'nvim-tree',
-  },
   { --Comment
     'numToStr/Comment.nvim',
     config = conf 'comment',
-    --requires = {
-    --  'JoosepAlviste/nvim-ts-context-commentstring',
-    --  config = conf 'context-commentstring',
-    --},
+    requires = {
+      'JoosepAlviste/nvim-ts-context-commentstring',
+      config = conf 'context-commentstring',
+    },
   },
   { -- Lsp
     'neovim/nvim-lspconfig',
@@ -115,6 +111,10 @@ local plugins = {
   { -- Autosave
     'Pocco81/auto-save.nvim',
     config = conf 'auto-save',
+  },
+  { -- Tree
+    'kyazdani42/nvim-tree.lua',
+    config = conf 'nvim-tree',
   },
 }
 
