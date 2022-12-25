@@ -7,7 +7,9 @@
       extra-platforms = aarch64-darwin x86_64-darwin # But we use rosetta too
       experimental-features = nix-command flakes
       build-users-group = nixbld
-    '';
+      # experimental-features = [ "nix-command" "flakes" ];
+    '' + lib.optionalString (config.nix.package == pkgs.nixFlakes)
+      "experimental-features = nix-command flakes";
   };
 
   programs.fish.enable = true;
@@ -21,7 +23,6 @@
     # Set the default shell as fish for the user. MacOS doesn't do this like nixOS does
     sudo chsh -s ${lib.getBin pkgs.fish}/bin/fish bradford
   '';
-
 
   services.yabai = {
     enable = true;
@@ -110,16 +111,16 @@
                  yabai -m window --grid 4:4:1:1:2:2
       # toggle window zoom
       lalt - d : yabai -m window --toggle zoom-parent
-   '';
+    '';
   };
-
 
   fonts = {
     fontDir.enable = true;
-    fonts = with pkgs; [
-      ibm-plex
-      self.packages.${pkgs.system}.pragmata-pro
-    ];
+    fonts = with pkgs;
+      [
+        ibm-plex
+        #self.packages.${pkgs.system}.pragmata-pro
+      ];
   };
   # Remap caps lock to escape
   system.keyboard = {
@@ -137,14 +138,8 @@
     };
     NSGlobalDomain = {
       AppleFontSmoothing = 1;
-      # AppleKeyboardUIMode = 3;
-      # ApplePressAndHoldEnabled = false;
-      # AppleFontSmoothing = 1;
-      # _HIHideMenuBar = true;
       InitialKeyRepeat = 10;
       KeyRepeat = 1;
-      # "com.apple.mouse.tapBehavior" = 1;
-      # "com.apple.swipescrolldirection" = true;
     };
   };
 }

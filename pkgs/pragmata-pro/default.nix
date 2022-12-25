@@ -1,7 +1,4 @@
-{
-  stdenv,
-  nerd-font-patcher,
-}:
+{ stdenv, nerd-font-patcher, }:
 stdenv.mkDerivation {
   pname = "pragmata-pro";
   version = "1.0.0";
@@ -11,7 +8,7 @@ stdenv.mkDerivation {
     rev = "8471c1332e9e39d70c656b3ef9be0a47ab353a2c";
   };
 
-  nativeBuildInputs = [nerd-font-patcher];
+  nativeBuildInputs = [ nerd-font-patcher ];
 
   installPhase = ''
     runHook preInstall
