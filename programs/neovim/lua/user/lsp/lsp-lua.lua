@@ -1,1 +1,1 @@
-return require("lua-dev").setup({})
+return require("neodev").setup({})
