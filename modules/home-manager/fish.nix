@@ -20,6 +20,13 @@
 
       set -xg PATH $HOME/bin /opt/homebrew/bin $PATH
       set -xg PATH (yarn global bin) $PATH
+
+      function rebuild-mbp
+        pushd ~/.config/nixpkg
+        eval nix build ~/.config/nixpkgs#darwinConfigurations.bradford-mbp.system
+        eval ./result/sw/bin/darwin-rebuild switch --flake .#bradford-mbp
+        popd
+      end
     '';
 
     interactiveShellInit = ''
@@ -27,6 +34,7 @@
       eval (direnv hook fish)
       eval (zoxide init fish)
       any-nix-shell fish --info-right | source
+
     '';
 
     shellAliases = {
