@@ -59,14 +59,14 @@ return packer.startup(function(use)
 
   -- Languages
   use 'LnL7/vim-nix'
-  use({'scalameta/nvim-metals', requires = { "nvim-lua/plenary.nvim" }})
+  use({ 'scalameta/nvim-metals', requires = { "nvim-lua/plenary.nvim" } })
 
   -- LSP
   use "neovim/nvim-lspconfig" -- enable LSP
   use "williamboman/nvim-lsp-installer" -- simple to use language server installer
   use "tamago324/nlsp-settings.nvim" -- language server settings defined in json for
   use "jose-elias-alvarez/null-ls.nvim" -- for formatters and linters
-  use "folke/lua-dev.nvim"
+  use 'folke/neodev.nvim'
   use "lukas-reineke/lsp-format.nvim"
   use "tami5/lspsaga.nvim"
   use "MunifTanjim/prettier.nvim"
