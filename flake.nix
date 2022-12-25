@@ -50,69 +50,69 @@
       inputs.nixpkgs.follows = "unstable";
     };
   };
-  outputs = { self, nixpkgs, darwin, home-manager, ... }@inputs: let
-    pkgs = nixpkgs.legacyPackages."aarch64-darwin";
-  in {
-    packages."aarch64-darwin" = {
-      pragmata-pro = pkgs.callPackage ./pkgs/pragmata-pro {};
-    };
+  outputs = { self, nixpkgs, darwin, home-manager, ... }@inputs:
+    let pkgs = nixpkgs.legacyPackages."aarch64-darwin";
+    in {
+      # packages."aarch64-darwin" = {
+      #   pragmata-pro = pkgs.callPackage ./pkgs/pragmata-pro { };
+      # };
 
-    darwinConfigurations."bradford-mbp" = darwin.lib.darwinSystem {
-      system = "aarch64-darwin";
-      specialArgs = {
-        inherit self inputs;
-      };
-      modules = [
-        ./modules/mac.nix
-        ./modules/pam.nix
-        home-manager.darwinModule
-        {
-          home-manager = {
-            useGlobalPkgs = true;
-            useUserPackages = true;
-            users.bradford = {
-              imports = [
-                inputs.base16.hmModule
-                ./modules/home.nix
-                # ./modules/theme.nix
+      ####### Laptop Config #######
+      darwinConfigurations."bradford-mbp" = darwin.lib.darwinSystem {
+        system = "aarch64-darwin";
+        specialArgs = { inherit self inputs; };
+        modules = [
+          ./modules/mac.nix
+          ./modules/pam.nix
+          home-manager.darwinModule
+          {
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              users.bradford = {
+                imports = [
+                  inputs.base16.hmModule
+                  ./modules/home.nix
+                  # ./modules/theme.nix
+                ];
+              };
+            };
+          }
+          ({ config, pkgs, lib, ... }: {
+
+            services.nix-daemon.enable = true;
+            security.pam.enableSudoTouchIdAuth = true;
+            nixpkgs = {
+              overlays = with inputs; [
+                nur.overlay
+                neovim-overlay.overlay
+                (final: prev: {
+                  # yabai is broken on macOS 12, so lets make a smol overlay to use the master version
+                  yabai = let
+                    version = "4.0.0-dev";
+                    buildSymlinks = prev.runCommand "build-symlinks" { } ''
+                      mkdir -p $out/bin
+                      ln -s /usr/bin/xcrun /usr/bin/xcodebuild /usr/bin/tiffutil /usr/bin/qlmanage $out/bin
+                    '';
+                  in prev.yabai.overrideAttrs (old: {
+                    inherit version;
+                    src = inputs.yabai-src;
+
+                    buildInputs = with prev.darwin.apple_sdk.frameworks; [
+                      Carbon
+                      Cocoa
+                      ScriptingBridge
+                      prev.xxd
+                      SkyLight
+                    ];
+
+                    nativeBuildInputs = [ buildSymlinks ];
+                  });
+                })
               ];
             };
-          };
-        }
-        ({ config, pkgs, lib, ... }: {
-          services.nix-daemon.enable = true;
-          security.pam.enableSudoTouchIdAuth = true;
-          nixpkgs = {
-            overlays = with inputs; [
-              nur.overlay
-              neovim-overlay.overlay
-              (final: prev: {
-                # yabai is broken on macOS 12, so lets make a smol overlay to use the master version
-                yabai = let
-                  version = "4.0.0-dev";
-                  buildSymlinks = prev.runCommand "build-symlinks" { } ''
-                    mkdir -p $out/bin
-                    ln -s /usr/bin/xcrun /usr/bin/xcodebuild /usr/bin/tiffutil /usr/bin/qlmanage $out/bin
-                  '';
-                in prev.yabai.overrideAttrs (old: {
-                  inherit version;
-                  src = inputs.yabai-src;
-
-                  buildInputs = with prev.darwin.apple_sdk.frameworks; [
-                    Carbon
-                    Cocoa
-                    ScriptingBridge
-                    prev.xxd
-                    SkyLight
-                  ];
-
-                  nativeBuildInputs = [ buildSymlinks ];
-                });
-              })
-            ];
-          };
-        })
-      ];
+          })
+        ];
+      };
     };
-  };
 }
