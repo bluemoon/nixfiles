@@ -13,14 +13,14 @@
 
   programs.fish.enable = true;
   environment.shells = with pkgs; [ fish ];
-  users.users.bradford = {
-    home = "/Users/bradford";
+  users.users.bradfordtoney = {
+    home = "/Users/bradfordtoney";
     shell = pkgs.fish;
   };
 
   system.activationScripts.postActivation.text = ''
     # Set the default shell as fish for the user. MacOS doesn't do this like nixOS does
-    sudo chsh -s ${lib.getBin pkgs.fish}/bin/fish bradford
+    sudo chsh -s ${lib.getBin pkgs.fish}/bin/fish bradfordtoney
   '';
 
   services.yabai = {
@@ -34,11 +34,11 @@
       split_ratio = "0.50";
       window_placement = "second_child";
       # Gaps
-      window_gap = 12;
-      top_padding = 12;
-      bottom_padding = 12;
-      left_padding = 12;
-      right_padding = 12;
+      window_gap = 8;
+      top_padding = 8;
+      bottom_padding = 8;
+      left_padding = 8;
+      right_padding = 8;
       # shadows and borders
       window_shadow = "on";
       window_border = "off";
@@ -55,7 +55,6 @@
     };
     extraConfig = ''
       # rules
-      yabai -m rule --add app=emacs-29.0.50 manage=on
       yabai -m rule --add app='Firefox Nightly' manage=on
       yabai -m rule --add app='System Preferences' manage=off
       yabai -m rule --add app='Activity Monitor' manage=off
@@ -114,7 +113,7 @@
   };
 
   fonts = {
-    fontDir.enable = true;
+    fontDir.enable = false;
     fonts = with pkgs;
       [
         ibm-plex
