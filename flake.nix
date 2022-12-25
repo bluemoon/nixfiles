@@ -69,7 +69,7 @@
             home-manager = {
               useGlobalPkgs = true;
               useUserPackages = true;
-              users.bradford = {
+              users.bradfordtoney = {
                 imports = [
                   inputs.base16.hmModule
                   ./modules/home.nix

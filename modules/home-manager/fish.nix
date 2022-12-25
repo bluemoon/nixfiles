@@ -3,38 +3,40 @@
     enable = true;
     loginShellInit = ''
       set -xg TERM xterm-256color
+
       if test -e /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
         fenv source /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
       end
+
       if test -e /nix/var/nix/profiles/default/etc/profile.d/nix.sh
         fenv source /nix/var/nix/profiles/default/etc/profile.d/nix.sh
       end
+
       if test -e $HOME/.nix-profile/etc/profile.d/hm-session-vars.sh
         fenv source $HOME/.nix-profile/etc/profile.d/hm-session-vars.sh
       end
 
       fish_add_path $HOME/bin
       fish_add_path -m $HOME/.local/bin
+      # For rust
       fish_add_path -m $HOME/.cargo/bin
-      fish_add_path $HOME/Library/Application Support/Coursier/bin
 
       set -xg PATH $HOME/bin /opt/homebrew/bin $PATH
       set -xg PATH (yarn global bin) $PATH
+    '';
+
+    interactiveShellInit = ''
+      any-nix-shell fish --info-right | source
+      set -xg NIX_PATH $HOME/.nix-defexpr/channels:/nix/var/nix/profiles/per-user/root/channels
+      eval (zoxide init fish)
+      eval (direnv hook fish)
 
       function rebuild-mbp
-        pushd ~/.config/nixpkg
+        pushd ~/.config/nixpkgs
         eval nix build ~/.config/nixpkgs#darwinConfigurations.bradford-mbp.system
         eval ./result/sw/bin/darwin-rebuild switch --flake .#bradford-mbp
         popd
       end
-    '';
-
-    interactiveShellInit = ''
-      set -xg NIX_PATH $HOME/.nix-defexpr/channels:/nix/var/nix/profiles/per-user/root/channels
-      eval (direnv hook fish)
-      eval (zoxide init fish)
-      any-nix-shell fish --info-right | source
-
     '';
 
     shellAliases = {
