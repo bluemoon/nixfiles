@@ -7,7 +7,6 @@
       extra-platforms = aarch64-darwin x86_64-darwin # But we use rosetta too
       experimental-features = nix-command flakes
       build-users-group = nixbld
-      # experimental-features = [ "nix-command" "flakes" ];
     '' + lib.optionalString (config.nix.package == pkgs.nixFlakes)
       "experimental-features = nix-command flakes";
   };
