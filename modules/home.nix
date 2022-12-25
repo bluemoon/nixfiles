@@ -16,7 +16,6 @@
     nix-direnv.enable = true;
   };
 
-
   programs.bat = { enable = true; };
 
   # Better ls
@@ -41,29 +40,6 @@
   programs.nix-index = {
     enable = true;
     enableFishIntegration = true;
-  };
-
-  # Enable ZSH
-  programs.zsh = {
-    enable = true;
-    autocd = true;
-    enableCompletion = true;
-    enableAutosuggestions = true;
-    initExtra = ''
-      export PATH=/Users/bradfordtoney/.cargo/bin:$HOME/go/bin:/usr/local/bin:/Users/bradfordtoney/.nix-profile/bin/:/home/bradford/.local/bin/:$PATH
-      export PATH="$(yarn global bin):$PATH"
-      eval "$(zoxide init zsh)"
-    '';
-    oh-my-zsh = {
-      enable = true;
-      theme = "robbyrussell";
-      # plugins = [ "command-not-found" "git" "history" "sudo" "fzf" "dotenv" ];
-    };
-    shellAliases = {
-      k = "kubectl";
-      vi = "nvim";
-      vim = "nvim";
-    };
   };
 
   # Git config
@@ -119,5 +95,6 @@
     pkgs.yarn
   ];
 
-  imports = [ home-manager/fish.nix home-manager/tmux.nix home-manager/alacritty.nix ];
+  imports =
+    [ home-manager/fish.nix home-manager/tmux.nix home-manager/alacritty.nix ];
 }

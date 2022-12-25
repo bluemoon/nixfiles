@@ -79,7 +79,6 @@
             };
           }
           ({ config, pkgs, lib, ... }: {
-
             services.nix-daemon.enable = true;
             security.pam.enableSudoTouchIdAuth = true;
             nixpkgs = {
