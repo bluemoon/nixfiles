@@ -14,7 +14,7 @@
   programs.fish.enable = true;
   environment.shells = with pkgs; [ fish ];
   users.users.bradfordtoney = {
-    home = "/Users/bradfordtoney";
+    home = "/Users/bradford";
     shell = pkgs.fish;
   };
 
