@@ -90,7 +90,7 @@ function M.enable_format_on_save()
   vim.cmd [[
     augroup format_on_save
       au!
-      au BufWritePre * undojoin | lua vim.lsp.buf.formatting_sync()
+      au BufWritePre * undojoin | lua vim.lsp.buf.format()
     augroup end
   ]]
 end
