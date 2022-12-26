@@ -116,6 +116,8 @@ local plugins = {
     'kyazdani42/nvim-tree.lua',
     config = conf 'nvim-tree',
   },
+  { "akinsho/toggleterm.nvim", tag = '*', config = conf 'toggleterm' }
+
 }
 
 
