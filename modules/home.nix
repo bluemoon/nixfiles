@@ -88,6 +88,7 @@
     pkgs.rustup
     pkgs.tmux
     pkgs.tree-sitter
+    pkgs.tree-sitter-grammars.tree-sitter-nix
     pkgs.stylua
     pkgs.sumneko-lua-language-server
     pkgs.rust-analyzer
