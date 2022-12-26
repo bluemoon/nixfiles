@@ -92,10 +92,10 @@ local plugins = {
     config = conf 'gitsigns',
     requires = { 'nvim-lua/plenary.nvim' },
   },
-  { -- Indent guides
-    'lukas-reineke/indent-blankline.nvim',
-    config = conf 'indent-blankline',
-  },
+  -- { -- Indent guides
+  --   'lukas-reineke/indent-blankline.nvim',
+  --   config = conf 'indent-blankline',
+  -- },
   { -- Statusline
     'feline-nvim/feline.nvim',
     config = conf 'feline',
