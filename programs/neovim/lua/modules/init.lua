@@ -116,10 +116,18 @@ local plugins = {
     'kyazdani42/nvim-tree.lua',
     config = conf 'nvim-tree',
   },
-  { "akinsho/toggleterm.nvim", tag = '*', config = conf 'toggleterm' }
-
+  { --ToggleTerm
+    'akinsho/toggleterm.nvim',
+    tag = '*',
+    config = conf 'toggleterm',
+  },
+  { -- Autopairs
+    'windwp/nvim-autopairs',
+    config = function()
+      require('nvim-autopairs').setup {}
+    end,
+  },
 }
-
 
 local install_path = vim.fn.stdpath 'data' .. '/site/pack/packer/start/packer.nvim'
 if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
