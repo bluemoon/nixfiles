@@ -18,4 +18,4 @@ require 'modules'
 require 'core.keymaps'
 
 vim.g.catppuccin_flavour = 'macchiato'
-vim.cmd 'colorscheme catppuccin'
+vim.cmd 'colorscheme kanagawa'
