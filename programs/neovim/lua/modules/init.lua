@@ -9,6 +9,10 @@ local plugins = {
     as = 'catppuccin',
     config = conf 'catppuccin',
   },
+  {
+    'rebelot/kanagawa.nvim',
+    config = conf 'kanagawa',
+  },
   { -- Treesiter
     'nvim-treesitter/nvim-treesitter',
     config = conf 'nvim-treesitter',
@@ -124,6 +128,7 @@ local plugins = {
   { -- Autopairs
     'windwp/nvim-autopairs',
     config = function()
+      -- todo: move to file
       require('nvim-autopairs').setup {}
     end,
   },
