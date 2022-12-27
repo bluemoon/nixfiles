@@ -27,7 +27,7 @@ return function()
     ['rust_analyzer'] = function()
       require('rust-tools').setup {
         tools = {
-          inlay_hints = { auto = true },
+          inlay_hints = { auto = false },
           hover_actions = {
             auto_focus = true,
           },
