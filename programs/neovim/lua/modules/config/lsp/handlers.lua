@@ -86,15 +86,6 @@ if cmp_nvim_lsp then
 end
 M.capabilities = capabilities
 
-function M.enable_format_on_save()
-  vim.cmd [[
-    augroup format_on_save
-      au!
-      au BufWritePre * undojoin | lua vim.lsp.buf.format()
-    augroup end
-  ]]
-end
-
 function M.toggle_format_on_save()
   if vim.fn.exists '#format_on_save#BufWritePre' == 0 then
     M.enable_format_on_save()
