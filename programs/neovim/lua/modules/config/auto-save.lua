@@ -4,5 +4,5 @@ return function()
     return
   end
 
-  auto_save.setup {}
+  auto_save.setup { enabled = false }
 end
