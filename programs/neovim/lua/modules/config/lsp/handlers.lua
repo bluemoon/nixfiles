@@ -86,16 +86,6 @@ if cmp_nvim_lsp then
 end
 M.capabilities = capabilities
 
-function M.toggle_format_on_save()
-  if vim.fn.exists '#format_on_save#BufWritePre' == 0 then
-    M.enable_format_on_save()
-    vim.notify 'Enabled format on save'
-  else
-    vim.cmd 'au! format_on_save'
-    vim.notify 'Disabled format on save'
-  end
-end
-
 local diagnostic_show = true
 function M.toggle_virtual_text()
   if diagnostic_show then
