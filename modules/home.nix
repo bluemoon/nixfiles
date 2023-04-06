@@ -94,6 +94,7 @@
     pkgs.rust-analyzer
     pkgs.zoxide
     pkgs.yarn
+    pkgs.ruby
   ];
 
   imports =

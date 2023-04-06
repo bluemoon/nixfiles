@@ -37,6 +37,8 @@
         eval ./result/sw/bin/darwin-rebuild switch --flake .#bradford-mbp
         popd
       end
+
+      status --is-interactive; and rbenv init - fish | source
     '';
 
     shellAliases = {

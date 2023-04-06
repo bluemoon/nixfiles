@@ -24,6 +24,14 @@ return function()
         on_attach = require('modules.config.lsp.handlers').on_attach,
       }
     end,
+    ['ruby_ls'] = function()
+      require('lspconfig').ruby_ls.setup {
+        server = {
+          capabilities = require('modules.config.lsp.handlers').capabilities,
+          on_attach = require('modules.config.lsp.handlers').on_attach,
+        },
+      }
+    end,
     ['rust_analyzer'] = function()
       require('rust-tools').setup {
         tools = {
