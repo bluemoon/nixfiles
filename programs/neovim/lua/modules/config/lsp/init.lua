@@ -14,7 +14,7 @@ return function()
   end
 
   mason_lspconfig.setup {
-    ensure_installed = { 'rust_analyzer', 'sumneko_lua', 'tailwindcss', 'tsserver' },
+    ensure_installed = { 'rust_analyzer', 'sumneko_lua', 'tailwindcss', 'tsserver', 'ruby_ls', 'sorbet' },
   }
 
   mason_lspconfig.setup_handlers {
