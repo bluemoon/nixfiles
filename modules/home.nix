@@ -56,6 +56,7 @@
       pull.rebase = true;
       push.autoSetupRemote = true;
       user.signingkey = "9159E6B4C25B8F6B";
+      commit.gpgsign = true;
     };
   };
   xdg.configFile."nvim/init.lua".source = ../programs/neovim/init.lua;
