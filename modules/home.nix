@@ -55,6 +55,7 @@
       # url."ssh://git@github.com/".insteadOf = "https://github.com/";
       pull.rebase = true;
       push.autoSetupRemote = true;
+      user.signingkey = "9159E6B4C25B8F6B";
     };
   };
   xdg.configFile."nvim/init.lua".source = ../programs/neovim/init.lua;
