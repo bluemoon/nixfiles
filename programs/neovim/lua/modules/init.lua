@@ -5,11 +5,6 @@ end
 local plugins = {
   -- Colorschemes
   {
-    'catppuccin/nvim',
-    as = 'catppuccin',
-    config = conf 'catppuccin',
-  },
-  {
     'rebelot/kanagawa.nvim',
     config = conf 'kanagawa',
   },
@@ -39,7 +34,7 @@ local plugins = {
   },
   { --Comment
     'numToStr/Comment.nvim',
-    config = conf 'comment',
+    -- config = conf 'comment',
     requires = {
       'JoosepAlviste/nvim-ts-context-commentstring',
       config = conf 'context-commentstring',

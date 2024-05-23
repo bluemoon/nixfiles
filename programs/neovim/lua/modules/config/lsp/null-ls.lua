@@ -24,7 +24,7 @@ M.setup = function()
     end,
     sources = {
       format.rubocop,
-      format.erb_lint,
+      -- format.erb_lint,
       format.prettierd,
       format.stylua,
       format.rustfmt.with {
