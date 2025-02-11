@@ -21,7 +21,9 @@
       # For rust
       fish_add_path -m $HOME/.cargo/bin
 
-      set -xg PATH $HOME/bin /opt/homebrew/bin $PATH
+      # Homebrew
+      fish_add_path /opt/homebrew/sbin
+      fish_add_path /opt/homebrew/bin
       set -xg PATH (yarn global bin) $PATH
     '';
 
