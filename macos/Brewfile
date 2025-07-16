@@ -3,7 +3,6 @@ tap "homebrew/cask-fonts"
 brew "skhd"
 brew "yabai"
 brew "zoxide"
-brew "neovim"
 brew "node"
 
 # Fonts
