@@ -2,18 +2,18 @@
   description = "Bradford's Nix Environment";
 
   inputs = {
-    # All packages should follow latest nixpkgs/nur
-    unstable.url = "github:nixos/nixpkgs/master";
+    # All packages should follow nixpkgs-unstable for macOS
+    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     nur.url = "github:nix-community/NUR";
     # Nix-Darwin
     darwin = {
       url = "github:LnL7/nix-darwin";
-      inputs.nixpkgs.follows = "unstable";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     # HM-manager for dotfile/user management
     home-manager = {
       url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "unstable";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     # WM
     yabai-src = {
@@ -23,22 +23,17 @@
     # Themeing
     base16 = {
       url = "github:shaunsingh/base16.nix";
-      inputs.nixpkgs.follows = "unstable";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     # IBM-Carbon-Theme (see IBM-design: colors)
     base16-carbon-dark = {
       url = "github:shaunsingh/base16-carbon-dark";
       flake = false;
     };
-    # Neovim Nightly
-    neovim-overlay = {
-      url = "github:nix-community/neovim-nightly-overlay";
-      inputs.nixpkgs.follows = "unstable";
-    };
     # Get the latest and greatest wayland tools
     nixpkgs-wayland = {
       url = "github:nix-community/nixpkgs-wayland";
-      inputs.nixpkgs.follows = "unstable";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     # But sway is special :)
     sway-borders-src = {
@@ -47,7 +42,16 @@
     };
     eww = {
       url = "github:elkowar/eww";
-      inputs.nixpkgs.follows = "unstable";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    nixvim = {
+      url = "github:nix-community/nixvim";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    nixvim-config = {
+      url = "path:./modules/nixvim";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixvim.follows = "nixvim";
     };
   };
   outputs = { self, nixpkgs, darwin, home-manager, ... }@inputs:
@@ -63,12 +67,12 @@
         specialArgs = { inherit self inputs; };
         modules = [
           ./modules/mac.nix
-          ./modules/pam.nix
-          home-manager.darwinModule
+          home-manager.darwinModules.home-manager
           {
             home-manager = {
               useGlobalPkgs = true;
               useUserPackages = true;
+              extraSpecialArgs = { inherit inputs; };
               users.bradfordtoney = {
                 imports = [
                   inputs.base16.hmModule
@@ -79,35 +83,13 @@
             };
           }
           ({ config, pkgs, lib, ... }: {
-            services.nix-daemon.enable = true;
-            security.pam.enableSudoTouchIdAuth = true;
+            nix.enable = true;
+            security.pam.services.sudo_local.touchIdAuth = true;
             nixpkgs = {
+              config.allowBroken = true;
+              config.allowUnfree = true;
               overlays = with inputs; [
-                nur.overlay
-                neovim-overlay.overlay
-                (final: prev: {
-                  # yabai is broken on macOS 12, so lets make a smol overlay to use the master version
-                  yabai = let
-                    version = "4.0.0-dev";
-                    buildSymlinks = prev.runCommand "build-symlinks" { } ''
-                      mkdir -p $out/bin
-                      ln -s /usr/bin/xcrun /usr/bin/xcodebuild /usr/bin/tiffutil /usr/bin/qlmanage $out/bin
-                    '';
-                  in prev.yabai.overrideAttrs (old: {
-                    inherit version;
-                    src = inputs.yabai-src;
-
-                    buildInputs = with prev.darwin.apple_sdk.frameworks; [
-                      Carbon
-                      Cocoa
-                      ScriptingBridge
-                      prev.xxd
-                      SkyLight
-                    ];
-
-                    nativeBuildInputs = [ buildSymlinks ];
-                  });
-                })
+                nur.overlays.default
               ];
             };
           })
