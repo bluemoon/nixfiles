@@ -1,4 +1,10 @@
-{ config, pkgs, home-manager, inputs, ... }:
+{
+  config,
+  pkgs,
+  home-manager,
+  inputs,
+  ...
+}:
 
 {
   # Let Home Manager install and manage itself.
@@ -8,7 +14,9 @@
   # paths it should manage.
   # home.username = "bradford";
   # home.homeDirectory = "/Users/bradford";
-  home.sessionVariables = { EDITOR = "nvim"; };
+  home.sessionVariables = {
+    EDITOR = "nvim";
+  };
   #
   programs.direnv = {
     enable = true;
@@ -16,7 +24,9 @@
     nix-direnv.enable = true;
   };
 
-  programs.bat = { enable = true; };
+  programs.bat = {
+    enable = true;
+  };
 
   # Better ls
   programs.eza = {
@@ -49,10 +59,14 @@
     enable = true;
     userName = "Bradford Toney";
     userEmail = "bradford.toney@gmail.com";
-    aliases = { st = "status"; };
+    aliases = {
+      st = "status";
+    };
 
     extraConfig = {
-      core = { editor = "nvim"; };
+      core = {
+        editor = "nvim";
+      };
       # TODO: Breaks Cargo?
       # url."ssh://git@github.com/".insteadOf = "https://github.com/";
       pull.rebase = true;
@@ -100,6 +114,8 @@
     inputs.nixvim-config.packages.${pkgs.system}.default
   ];
 
-  imports =
-    [ ./home-manager/fish.nix ./home-manager/tmux.nix ];
+  imports = [
+    ./home-manager/fish.nix
+    ./home-manager/tmux.nix
+  ];
 }
