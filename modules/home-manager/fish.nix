@@ -6,26 +6,7 @@
     loginShellInit = ''
       set -xg TERM xterm-256color
 
-      if test -e /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
-        fenv source /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
-      end
-
-      if test -e /nix/var/nix/profiles/default/etc/profile.d/nix.sh
-        fenv source /nix/var/nix/profiles/default/etc/profile.d/nix.sh
-      end
-
-      if test -e $HOME/.nix-profile/etc/profile.d/hm-session-vars.sh
-        fenv source $HOME/.nix-profile/etc/profile.d/hm-session-vars.sh
-      end
-
-
-      fish_add_path -gP /opt/homebrew/bin
-      fish_add_path -gP /opt/homebrew/sbin
-
-      # Nix paths
-      fish_add_path -gP /run/current-system/sw/bin
-      fish_add_path -gP /etc/profiles/per-user/bradfordtoney/bin
-      fish_add_path -gP $HOME/.nix-profile/bin
+      fish_add_path --move --prepend --path $HOME/.nix-profile/bin /run/wrappers/bin /etc/profiles/per-user/$USER/bin /run/current-system/sw/bin /nix/var/nix/profiles/default/bin 
 
       # User paths
       fish_add_path -g $HOME/bin
@@ -159,13 +140,14 @@
     shellAliases = {
       cat = "bat";
       vim = "nvim";
+      g = "git";
+      ga = "git add";
+      gaa = "git add --all";
+      gc = "git commit -v";
     };
 
     shellAbbrs = {
       # Git shortcuts
-      g = "git";
-      ga = "git add";
-      gaa = "git add --all";
       gapa = "git add --patch";
       gau = "git add --update";
       gav = "git add --verbose";
@@ -186,7 +168,6 @@
       gbsr = "git bisect reset";
       gbss = "git bisect start";
 
-      gc = "git commit -v";
       "gc!" = "git commit -v --amend";
       "gcn!" = "git commit -v --no-edit --amend";
       gca = "git commit -v -a";
