@@ -1,11 +1,10 @@
-{ config, pkgs, lib, inputs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   programs.neovim = {
     enable = true;
-    package = pkgs.neovim-nightly;
+    package = pkgs.neovim-unwrapped;
     
-    defaultEditor = true;
     viAlias = true;
     vimAlias = true;
     vimdiffAlias = true;
@@ -14,21 +13,25 @@
     withPython3 = true;
     withRuby = true;
 
+    plugins = with pkgs.vimPlugins; [
+      lazy-nvim
+      kanagawa-nvim  # Add other plugins here as needed
+    ];
+
     extraPackages = with pkgs; [
       # Language servers
-      rnix-lsp
+      nil
       sumneko-lua-language-server
-      rust-analyzer
       nodePackages.typescript-language-server
       nodePackages.vscode-langservers-extracted
       nodePackages.yaml-language-server
-      nodePackages.pyright
+      pyright
       
       # Formatters
       stylua
-      nixfmt
+      nixfmt-classic
       nodePackages.prettier
-      black
+      python311Packages.black
       rustfmt
       
       # Tools
@@ -38,16 +41,7 @@
       fzf
     ];
 
-    extraLuaConfig = ''
-      -- Ensure packer is installed before loading config
-      local install_path = vim.fn.stdpath 'data' .. '/site/pack/packer/start/packer.nvim'
-      if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
-        vim.fn.system { 'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path }
-        vim.cmd 'packadd packer.nvim'
-      end
-
-      ${builtins.readFile ../../programs/neovim/init.lua}
-    '';
+    extraLuaConfig = builtins.readFile ../../programs/neovim/init.lua;
   };
 
   # Link the lua directory

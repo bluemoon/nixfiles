@@ -1,5 +1,14 @@
 { config, pkgs, lib, self, ... }: {
 
+  # Set primary user
+  system.primaryUser = "bradfordtoney";
+  
+  # Set state version
+  system.stateVersion = 6;
+
+  # Set nixbld group ID to match existing installation
+  ids.gids.nixbld = 30000;
+
   nix = {
     package = pkgs.nix;
     extraOptions = ''
@@ -7,8 +16,7 @@
       extra-platforms = aarch64-darwin x86_64-darwin # But we use rosetta too
       experimental-features = nix-command flakes
       build-users-group = nixbld
-    '' + lib.optionalString (config.nix.package == pkgs.nixFlakes)
-      "experimental-features = nix-command flakes";
+    '';
   };
 
   programs.fish.enable = true;
@@ -20,7 +28,7 @@
 
   system.activationScripts.postActivation.text = ''
     # Set the default shell as fish for the user. MacOS doesn't do this like nixOS does
-    sudo chsh -s ${lib.getBin pkgs.fish}/bin/fish bradfordtoney
+    sudo chsh -s /run/current-system/sw/bin/fish bradfordtoney
   '';
 
   services.yabai = {
@@ -113,8 +121,7 @@
   };
 
   fonts = {
-    fontDir.enable = false;
-    fonts = with pkgs;
+    packages = with pkgs;
       [
         ibm-plex
         #self.packages.${pkgs.system}.pragmata-pro

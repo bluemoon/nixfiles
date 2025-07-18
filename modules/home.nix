@@ -1,4 +1,4 @@
-{ config, pkgs, home-manager, ... }:
+{ config, pkgs, home-manager, inputs, ... }:
 
 {
   # Let Home Manager install and manage itself.
@@ -19,9 +19,11 @@
   programs.bat = { enable = true; };
 
   # Better ls
-  programs.exa = {
+  programs.eza = {
     enable = true;
-    enableAliases = true;
+    enableBashIntegration = true;
+    enableFishIntegration = true;
+    enableZshIntegration = true;
   };
 
   # FZF
@@ -80,23 +82,24 @@
     pkgs.htop
     pkgs.luajit
     pkgs.nodejs
-    pkgs.nixfmt
+    pkgs.nixfmt-classic
     pkgs.nix-prefetch
     pkgs.ripgrep
     pkgs.ripgrep-all
-    pkgs.rnix-lsp
+    pkgs.nil
     pkgs.rustup
     pkgs.tmux
     pkgs.tree-sitter
     pkgs.tree-sitter-grammars.tree-sitter-nix
     pkgs.stylua
     pkgs.sumneko-lua-language-server
-    pkgs.rust-analyzer
     pkgs.zoxide
     pkgs.yarn
     pkgs.ruby
+    pkgs.claude-code
+    inputs.nixvim-config.packages.${pkgs.system}.default
   ];
 
   imports =
-    [ home-manager/fish.nix home-manager/tmux.nix home-manager/alacritty.nix home-manager/neovim.nix ];
+    [ ./home-manager/fish.nix ./home-manager/tmux.nix ];
 }
