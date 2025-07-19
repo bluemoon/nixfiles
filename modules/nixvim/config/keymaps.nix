@@ -489,6 +489,13 @@
         desc = "Previous Tab";
       };
     }
+    {
+      mode = "n";
+      key = "g.";
+      action = "<cmd>lua require('fastaction').code_action()<cr>";
+      options = {
+        desc = "Code Action";
+      };
+    }
   ];
 }
-

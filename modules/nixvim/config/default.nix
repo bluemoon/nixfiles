@@ -28,6 +28,7 @@ _: {
     ./plugins/editor/todo-comments.nix
     ./plugins/editor/copilot-chat.nix
     ./plugins/editor/navic.nix
+    ./plugins/editor/fastaction.nix
 
     # UI plugins
     ./plugins/ui/bufferline.nix
@@ -54,3 +55,4 @@ _: {
     ./plugins/utils/web-devicons.nix
   ];
 }
+
