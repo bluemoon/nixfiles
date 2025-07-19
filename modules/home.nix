@@ -111,6 +111,7 @@
     pkgs.yarn
     pkgs.ruby
     pkgs.claude-code
+    pkgs.pnpm
     inputs.nixvim-config.packages.${pkgs.system}.default
   ];
 
