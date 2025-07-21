@@ -5,7 +5,7 @@
       enable = true;
     };
     lsp-format = {
-      enable = true;
+      enable = false;
     };
     helm = {
       enable = true;
@@ -42,6 +42,9 @@
           enable = true;
         };
         jsonls = {
+          enable = true;
+        };
+        svelte = {
           enable = true;
         };
         helm_ls = {
