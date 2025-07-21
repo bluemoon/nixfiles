@@ -3,50 +3,58 @@
 ## Installation
 
 1. Install XCode CLI tools
-    ```
-    xcode-select --install
-    ```
+
+   ```
+   xcode-select --install
+   ```
 
 2. Install Nix (a reboot could be necessary)
-    ```
-    sh <(curl -L https://nixos.org/nix/install)
-    ```
+
+   ```
+   sh <(curl -L https://nixos.org/nix/install)
+   ```
 
 3. Enable flakes and nix-command:
-    ```bash
-    mkdir -p ~/.config/nix
-    echo "experimental-features = nix-command flakes" >> ~/.config/nix/nix.conf
-    ```
+
+   ```bash
+   mkdir -p ~/.config/nix
+   echo "experimental-features = nix-command flakes" >> ~/.config/nix/nix.conf
+   ```
 
 4. Clone this repo inside `~/.config/nixpkgs` (must remove default nixpkgs before cloning)
-    ```
-    rm -r ~/.config/nixpkgs
-    git clone git@github.com:bluemoon/nixfiles.git ~/.config/nixpkgs
-    ```
+
+   ```
+   rm -r ~/.config/nixpkgs
+   git clone git@github.com:bluemoon/nixfiles.git ~/.config/nixpkgs
+   ```
 
 5. Install the flake
-    ```
-    cd ~/.config/nixpkgs
-    nix build .#darwinConfigurations.bradford-mbp.system
-    ./result/sw/bin/darwin-rebuild switch --flake .#bradford-mbp
-    ```
+
+   ```
+   cd ~/.config/nixpkgs
+   nix build .#darwinConfigurations.bradford-mbp.system
+   ./result/sw/bin/darwin-rebuild switch --flake .#bradford-mbp
+   ```
 
 6. Install Homebrew
-    ```
-    bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
-    ```
+
+   ```
+   bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+   ```
 
 7. Install apps from Homebrew
-    > NOTEs:
-    >   - Takes a **loooong** time
-    >   - **Will ask for password a lot of times...**
-    ```
-    brew bundle --verbose --file ~/.config/nixpkgs/macos/Brewfile
-    ```
+   > NOTEs:
+   >
+   > - Takes a **loooong** time
+   > - **Will ask for password a lot of times...**
+   ```
+   brew bundle --verbose --file ~/.config/nixpkgs/macos/Brewfile
+   ```
 
 ---
 
 ## System Architecture
+
 - **Nix Darwin**: System-level macOS configuration
 - **Home Manager**: User-level dotfiles and package management
 - **Flakes**: Reproducible configuration with pinned dependencies
@@ -75,12 +83,15 @@
 ## Common Operations
 
 ### Update Configuration
+
 After making changes to any `.nix` files:
+
 ```bash
 darwin-rebuild switch --flake .#bradford-mbp
 ```
 
 ### Update All Dependencies
+
 ```bash
 # Update flake inputs
 nix flake update
@@ -90,29 +101,36 @@ darwin-rebuild switch --flake .#bradford-mbp
 ```
 
 ### Add a New Package
+
 1. Edit `modules/home.nix`
 2. Add package to `home.packages` list
 3. Run `darwin-rebuild switch --flake .#bradford-mbp`
 
 ### Modify Program Configuration
+
 1. Edit the relevant file in `modules/home-manager/`
 2. Run `darwin-rebuild switch --flake .#bradford-mbp`
 
 ## Package Management
 
 ### System Packages (via Nix)
+
 Packages are defined in `modules/home.nix` under `home.packages`. These include:
+
 - Development tools (ripgrep, fd, tree-sitter, etc.)
 - Language servers (rust-analyzer, rnix-lsp, lua-language-server)
 - CLI utilities (bat, exa, fzf, zoxide)
 
 ### Homebrew Packages
+
 Some packages are still managed via Homebrew (defined in `macos/Brewfile`):
+
 - GUI applications (Firefox, Spotify, Slack)
 - macOS-specific tools (yabai, skhd)
 - Fonts
 
 To update Homebrew packages:
+
 ```bash
 cd ~/.config/nixpkgs/macos
 brew bundle
@@ -121,13 +139,16 @@ brew bundle
 ## Neovim Setup
 
 Neovim is now managed entirely through Nix:
+
 - Package: `neovim-nightly` from the neovim-overlay
 - Configuration: Managed via home-manager
 - Plugins: Still using Packer (auto-bootstrapped)
 - Language servers: Installed via Nix packages
 
 ### First-time Neovim Setup
+
 After switching to the new configuration:
+
 1. Open Neovim: `nvim`
 2. Run `:PackerSync` to install all plugins
 3. Restart Neovim
@@ -135,7 +156,9 @@ After switching to the new configuration:
 ## Troubleshooting
 
 ### "Command not found" after switching
+
 Ensure your shell is sourcing the Nix environment:
+
 ```bash
 # For fish shell
 fish_add_path /nix/var/nix/profiles/default/bin
@@ -144,18 +167,23 @@ fish_add_path ~/.nix-profile/bin
 ```
 
 ### Flake evaluation errors
+
 Check for syntax errors:
+
 ```bash
 nix flake check
 ```
 
 ### Permission denied during darwin-rebuild
+
 Ensure nix-daemon is running:
+
 ```bash
 sudo launchctl kickstart -k system/org.nixos.nix-daemon
 ```
 
 ### Neovim plugins not loading
+
 1. Check if Packer is installed: `ls ~/.local/share/nvim/site/pack/packer/`
 2. Run `:PackerSync` in Neovim
 3. Check for errors: `:PackerStatus`
@@ -163,6 +191,7 @@ sudo launchctl kickstart -k system/org.nixos.nix-daemon
 ## Maintenance
 
 ### Regular Updates
+
 ```bash
 # Update flake inputs monthly
 nix flake update
@@ -175,7 +204,9 @@ nix-collect-garbage -d
 ```
 
 ### Backup Important Files
+
 Before major changes, backup:
+
 - `flake.lock` - Current working dependencies
 - Any local modifications to configs
 
@@ -188,4 +219,6 @@ Before major changes, backup:
 ---
 
 ## References
+
 1. https://github.com/shaunsingh/nix-darwin-dotfiles/blob/main/nix-config.org
+
