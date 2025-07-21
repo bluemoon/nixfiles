@@ -40,38 +40,6 @@
 
       status --is-interactive; and rbenv init - fish | source
 
-      # Tide configuration - minimal but informative
-      if status is-interactive
-        # Run tide configure on first setup if needed
-        if not set -q tide_prompt_add_newline_before
-          tide configure --auto --style=lean --prompt_colors='True color' --classic_prompt_color='Dark' --show_time='No' --lean_prompt_height='Two lines' --prompt_connection='Disconnected' --prompt_spacing='Sparse' --icons='Few icons' --transient='No'
-        end
-        
-        # Left prompt: path, git info, and prompt character on new line
-        set -g tide_left_prompt_items pwd git newline character
-        
-        # Right prompt: just status and long-running commands
-        set -g tide_right_prompt_items status cmd_duration
-        
-        # Clean up icons for minimal look
-        set -g tide_pwd_icon ""
-        set -g tide_pwd_icon_home "~"
-        set -g tide_git_icon " "
-        
-        # Simple prompt character
-        set -g tide_character_icon "❯"
-        
-        # Only show cmd_duration for commands over 3 seconds
-        set -g tide_cmd_duration_threshold 3000
-        set -g tide_cmd_duration_icon ""
-        
-        # Show context only when in SSH or as root
-        set -g tide_context_always_display false
-        
-        # Fix for git truncation
-        set -g tide_git_truncation_length 24
-        set -g tide_git_truncation_strategy ""
-      end
 
       # Git helper functions
       function git_current_branch
@@ -321,15 +289,6 @@
         repo = "plugin-git";
         rev = "2a3e35c05bdc5b9005f917d5281eb866b2e13104";
         sha256 = "sha256-tWiGIB6yHfZ+QSNJrahHxRQCIOaOlSNFby4bGIOIwic=";
-      };
-    }
-    {
-      name = "tide";
-      src = pkgs.fetchFromGitHub {
-        owner = "IlanCosman";
-        repo = "tide";
-        rev = "v6.1.1";
-        sha256 = "sha256-ZyEk/WoxdX5Fr2kXRERQS1U1QHH3oVSyBQvlwYnEYyc=";
       };
     }
   ];

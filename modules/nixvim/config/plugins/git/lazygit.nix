@@ -1,8 +1,8 @@
-{ pkgs, ... }:
+{ plugins, ... }:
 {
-  extraPlugins = with pkgs.vimPlugins; [
-    lazygit-nvim
-  ];
+  plugins.lazygit = {
+    enable = true;
+  };
 
   extraConfigLua = ''
     require("telescope").load_extension("lazygit")
