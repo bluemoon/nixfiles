@@ -14,6 +14,9 @@
       enable = true;
       inlayHints = true;
       servers = {
+        zls = {
+          enable = true;
+        };
         html = {
           enable = true;
         };

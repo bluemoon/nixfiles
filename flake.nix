@@ -30,16 +30,6 @@
       url = "github:shaunsingh/base16-carbon-dark";
       flake = false;
     };
-    # Get the latest and greatest wayland tools
-    nixpkgs-wayland = {
-      url = "github:nix-community/nixpkgs-wayland";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    # But sway is special :)
-    sway-borders-src = {
-      url = "github:fluix-dev/sway-borders";
-      flake = false;
-    };
     eww = {
       url = "github:elkowar/eww";
       inputs.nixpkgs.follows = "nixpkgs";

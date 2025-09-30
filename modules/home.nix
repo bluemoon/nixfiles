@@ -112,6 +112,10 @@
     pkgs.ruby
     pkgs.claude-code
     pkgs.pnpm
+    pkgs.kamal
+    pkgs._1password
+    pkgs._1password-gui
+    pkgs.zig
     inputs.nixvim-config.packages.${pkgs.system}.default
   ];
 
