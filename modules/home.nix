@@ -92,8 +92,11 @@
   home.packages = [
     pkgs.any-nix-shell
     # pkgs.direnv
+    pkgs.ast-grep
     pkgs.fd
+    pkgs.gnupg
     pkgs.htop
+    pkgs.jq
     pkgs.luajit
     pkgs.nodejs
     pkgs.nixfmt-classic
@@ -113,9 +116,12 @@
     pkgs.claude-code
     pkgs.pnpm
     pkgs.kamal
-    pkgs._1password
+    pkgs._1password-cli
     pkgs._1password-gui
     pkgs.zig
+    pkgs.pyrefly
+    pkgs.jujutsu
+    pkgs.codex
     inputs.nixvim-config.packages.${pkgs.system}.default
   ];
 

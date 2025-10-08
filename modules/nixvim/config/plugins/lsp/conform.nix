@@ -99,8 +99,8 @@
             stop_after_first = true;
           };
           python = [
-            "black"
-            "isort"
+            "ruff_format"
+            "ruff_organize_imports"
           ];
           lua = [ "stylua" ];
           nix = [ "nixfmt-rfc-style" ];
@@ -131,6 +131,12 @@
           };
           isort = {
             command = "${lib.getExe pkgs.isort}";
+          };
+          ruff_format = {
+            command = "${lib.getExe pkgs.ruff}";
+          };
+          ruff_organize_imports = {
+            command = "${lib.getExe pkgs.ruff}";
           };
           nixfmt-rfc-style = {
             command = "${lib.getExe pkgs.nixfmt-rfc-style}";
