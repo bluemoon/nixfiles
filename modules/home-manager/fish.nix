@@ -15,6 +15,9 @@
       # Development tools
       fish_add_path -g $HOME/.cargo/bin
 
+      # Python 3.11
+      fish_add_path -g /Library/Frameworks/Python.framework/Versions/3.11/bin
+
       # Yarn global bin - check if yarn exists first
       if command -q yarn
         set -l yarn_global_bin (yarn global bin 2>/dev/null)

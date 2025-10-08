@@ -35,6 +35,9 @@
         pyright = {
           enable = true;
         };
+        ruff = {
+          enable = true;
+        };
         gopls = {
           enable = true;
         };
@@ -42,7 +45,7 @@
           enable = true;
         };
         ansiblels = {
-          enable = true;
+          enable = false;
         };
         jsonls = {
           enable = true;
