@@ -29,9 +29,6 @@
         ts_ls = {
           enable = true;
         };
-        marksman = {
-          enable = true;
-        };
         pyright = {
           enable = true;
         };
@@ -40,6 +37,10 @@
         };
         gopls = {
           enable = true;
+        };
+        rust_analyzer = {
+          enable = true;
+          package = pkgs.rust-analyzer;
         };
         terraformls = {
           enable = true;

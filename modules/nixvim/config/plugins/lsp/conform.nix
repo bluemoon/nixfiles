@@ -115,7 +115,6 @@
             stop_after_first = true;
           };
           terraform = [ "terraform_fmt" ];
-          bicep = [ "bicep" ];
           bash = [
             "shellcheck"
             "shellharden"
@@ -161,9 +160,6 @@
           };
           shellharden = {
             command = "${lib.getExe pkgs.shellharden}";
-          };
-          bicep = {
-            command = "${lib.getExe pkgs.bicep}";
           };
           #yamlfmt = {
           #  command = "${lib.getExe pkgs.yamlfmt}";
