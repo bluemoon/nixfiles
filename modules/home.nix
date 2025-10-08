@@ -122,6 +122,7 @@
     pkgs.pyrefly
     pkgs.jujutsu
     pkgs.codex
+    pkgs.postgresql
     inputs.nixvim-config.packages.${pkgs.system}.default
   ];
 
