@@ -34,6 +34,15 @@
       eval (zoxide init fish)
       eval (direnv hook fish)
 
+      # Granted assume wrapper (use fenv to source bash script)
+      function assume
+        fenv source (which assume) $argv
+      end
+
+      if test -f ~/.config/fish/completions/granted.fish
+        source ~/.config/fish/completions/granted.fish
+      end
+
       function rebuild-mbp
         pushd ~/.config/nixpkgs
         eval nix build ~/.config/nixpkgs#darwinConfigurations.bradford-mbp.system
@@ -41,7 +50,9 @@
         popd
       end
 
-      status --is-interactive; and rbenv init - fish | source
+      if type -q rbenv
+        status --is-interactive; and rbenv init - fish | source
+      end
 
 
       # Git helper functions
