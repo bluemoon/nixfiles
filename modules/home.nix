@@ -57,13 +57,15 @@
   # Git config
   programs.git = {
     enable = true;
-    userName = "Bradford Toney";
-    userEmail = "bradford.toney@gmail.com";
-    aliases = {
-      st = "status";
-    };
-
-    extraConfig = {
+    settings = {
+      user = {
+        name = "Bradford Toney";
+        email = "bradford.toney@gmail.com";
+        signingkey = "9159E6B4C25B8F6B";
+      };
+      alias = {
+        st = "status";
+      };
       core = {
         editor = "nvim";
       };
@@ -71,7 +73,6 @@
       # url."ssh://git@github.com/".insteadOf = "https://github.com/";
       pull.rebase = true;
       push.autoSetupRemote = true;
-      user.signingkey = "9159E6B4C25B8F6B";
       commit.gpgsign = true;
     };
   };
