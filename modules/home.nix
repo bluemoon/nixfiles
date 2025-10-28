@@ -101,6 +101,7 @@
     pkgs.nodejs
     pkgs.nixfmt-classic
     pkgs.nix-prefetch
+    pkgs.protobuf
     pkgs.ripgrep
     pkgs.ripgrep-all
     pkgs.nil
@@ -119,10 +120,17 @@
     pkgs._1password-cli
     pkgs._1password-gui
     pkgs.zig
+    pkgs.caddy
+    pkgs.cmake
     pkgs.pyrefly
     pkgs.jujutsu
     pkgs.codex
-    pkgs.postgresql
+    pkgs.postgresql_16
+    pkgs.granted
+    (pkgs.awscli2.overrideAttrs (old: {
+      doCheck = false;
+      doInstallCheck = false;
+    }))
     inputs.nixvim-config.packages.${pkgs.system}.default
   ];
 
