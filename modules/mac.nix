@@ -12,9 +12,6 @@ in {
   # Set state version
   system.stateVersion = 6;
 
-  # Set nixbld group ID to match existing installation
-  ids.gids.nixbld = 30000;
-
   nix = {
     package = pkgs.nix;
     extraOptions = ''
