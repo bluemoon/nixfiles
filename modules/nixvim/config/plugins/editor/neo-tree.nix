@@ -15,6 +15,9 @@
         follow_current_file = {
           enabled = true;
         };
+        filtered_items = {
+          hide_dotfiles = false;
+        };
       };
 
       default_component_configs = {

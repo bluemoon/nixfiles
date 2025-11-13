@@ -98,6 +98,7 @@
     pkgs.gnupg
     pkgs.htop
     pkgs.jq
+    pkgs.just
     pkgs.luajit
     pkgs.nodejs
     pkgs.nixfmt-classic
@@ -111,7 +112,7 @@
     pkgs.tree-sitter
     pkgs.tree-sitter-grammars.tree-sitter-nix
     pkgs.stylua
-    pkgs.sumneko-lua-language-server
+    pkgs.lua-language-server
     pkgs.zoxide
     pkgs.yarn
     pkgs.ruby
@@ -123,11 +124,15 @@
     pkgs.zig
     pkgs.caddy
     pkgs.cmake
+    pkgs.colima
+    pkgs.duckdb
     pkgs.pyrefly
-    pkgs.jujutsu
+    # pkgs.jujutsu
     pkgs.codex
     pkgs.postgresql_16
     pkgs.granted
+    pkgs.overmind
+    pkgs.python3Packages.localstack-client
     (pkgs.awscli2.overrideAttrs (old: {
       doCheck = false;
       doInstallCheck = false;

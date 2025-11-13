@@ -21,7 +21,7 @@
     extraPackages = with pkgs; [
       # Language servers
       nil
-      sumneko-lua-language-server
+      lua-language-server
       nodePackages.typescript-language-server
       nodePackages.vscode-langservers-extracted
       nodePackages.yaml-language-server
