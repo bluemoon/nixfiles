@@ -77,6 +77,27 @@
     };
   };
 
+  programs.ssh = {
+    enable = true;
+    enableDefaultConfig = false;
+    matchBlocks."*" = {
+      forwardAgent = false;
+      addKeysToAgent = "no";
+      compression = false;
+      serverAliveInterval = 0;
+      serverAliveCountMax = 3;
+      hashKnownHosts = false;
+      userKnownHostsFile = "~/.ssh/known_hosts";
+      controlMaster = "no";
+      controlPath = "~/.ssh/master-%r@%n:%p";
+      controlPersist = "no";
+    };
+    extraConfig = ''
+      Host *
+        IdentityAgent "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
+    '';
+  };
+
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage
   # when a new Home Manager release introduces backwards
@@ -125,6 +146,7 @@
     pkgs.caddy
     pkgs.cmake
     pkgs.colima
+    pkgs.docker
     pkgs.duckdb
     pkgs.pyrefly
     # pkgs.jujutsu
