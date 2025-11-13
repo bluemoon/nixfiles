@@ -64,6 +64,8 @@
               useUserPackages = true;
               extraSpecialArgs = { inherit inputs; };
               users.bradfordtoney = {
+                home.username = "bradfordtoney";
+                home.homeDirectory = "/Users/bradfordtoney";
                 imports = [
                   inputs.base16.hmModule
                   ./modules/home.nix
@@ -99,6 +101,8 @@
               useUserPackages = true;
               extraSpecialArgs = { inherit inputs; };
               users.bradford = {
+                home.username = "bradford";
+                home.homeDirectory = "/Users/bradford";
                 imports = [
                   inputs.base16.hmModule
                   ./modules/home.nix
