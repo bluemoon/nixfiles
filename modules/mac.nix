@@ -1,8 +1,14 @@
-{ config, pkgs, lib, self, ... }: {
+{ config, pkgs, lib, self, ... }:
+let
+  primaryUser = config.system.primaryUser;
+  hasPrimaryUser = primaryUser != null;
+  primaryHome =
+    if hasPrimaryUser then "/Users/${primaryUser}" else null;
+in {
 
-  # Set primary user
-  system.primaryUser = "bradfordtoney";
-  
+  # Default primary user; hosts can override.
+  system.primaryUser = lib.mkDefault "bradfordtoney";
+
   # Set state version
   system.stateVersion = 6;
 
@@ -21,15 +27,18 @@
 
   programs.fish.enable = true;
   environment.shells = with pkgs; [ fish ];
-  users.users.bradfordtoney = {
-    home = "/Users/bradford";
-    shell = pkgs.fish;
+  users.users = lib.optionalAttrs hasPrimaryUser {
+    ${primaryUser} = {
+      home = primaryHome;
+      shell = pkgs.fish;
+    };
   };
 
-  system.activationScripts.postActivation.text = ''
-    # Set the default shell as fish for the user. MacOS doesn't do this like nixOS does
-    sudo chsh -s /run/current-system/sw/bin/fish bradfordtoney
-  '';
+  system.activationScripts.postActivation.text =
+    lib.optionalString hasPrimaryUser ''
+      # Set the default shell as fish for the user. MacOS doesn't do this like nixOS does
+      sudo chsh -s /run/current-system/sw/bin/fish ${primaryUser}
+    '';
 
   services.yabai = {
     enable = true;
