@@ -7,75 +7,73 @@
         folded_section = "#ffffff";
       };
 
-      sections = {
-        header = {
-          type = "text";
-          oldfilesDirectory = false;
-          align = "center";
-          foldSection = false;
-          title = "Header";
-          margin = 5;
-          content = [
-            "██████╗░██████╗░░█████╗░██████╗░███████╗░█████╗░██████╗░██████╗░ "
-            "██╔══██╗██╔══██╗██╔══██╗██╔══██╗██╔════╝██╔══██╗██╔══██╗██╔══██╗ "
-            "██████╦╝██████╔╝███████║██║░░██║█████╗░░██║░░██║██████╔╝██║░░██║ "
-            "██╔══██╗██╔══██╗██╔══██║██║░░██║██╔══╝░░██║░░██║██╔══██╗██║░░██║ "
-            "██████╦╝██║░░██║██║░░██║██████╔╝██║░░░░░╚█████╔╝██║░░██║██████╔╝ "
-            "╚═════╝░╚═╝░░╚═╝╚═╝░░╚═╝╚═════╝░╚═╝░░░░░░╚════╝░╚═╝░░╚═╝╚═════╝░"
-          ];
-          highlight = "Statement";
-          defaultColor = "";
-          oldfilesAmount = 0;
-        };
+      header = {
+        type = "text";
+        oldfiles_directory = false;
+        align = "center";
+        fold_section = false;
+        title = "Header";
+        margin = 5;
+        content = [
+          "██████╗░██████╗░░█████╗░██████╗░███████╗░█████╗░██████╗░██████╗░ "
+          "██╔══██╗██╔══██╗██╔══██╗██╔══██╗██╔════╝██╔══██╗██╔══██╗██╔══██╗ "
+          "██████╦╝██████╔╝███████║██║░░██║█████╗░░██║░░██║██████╔╝██║░░██║ "
+          "██╔══██╗██╔══██╗██╔══██║██║░░██║██╔══╝░░██║░░██║██╔══██╗██║░░██║ "
+          "██████╦╝██║░░██║██║░░██║██████╔╝██║░░░░░╚█████╔╝██║░░██║██████╔╝ "
+          "╚═════╝░╚═╝░░╚═╝╚═╝░░╚═╝╚═════╝░╚═╝░░░░░░╚════╝░╚═╝░░╚═╝╚═════╝░"
+        ];
+        highlight = "Statement";
+        default_color = "";
+        oldfiles_amount = 0;
+      };
 
-        body = {
-          type = "mapping";
-          oldfilesDirectory = false;
-          align = "center";
-          foldSection = false;
-          title = "Menu";
-          margin = 5;
-          content = [
-            [
-              " Find File"
-              "Telescope find_files"
-              "ff"
-            ]
-            [
-              "󰍉 Find Word"
-              "Telescope live_grep"
-              "fr"
-            ]
-            [
-              " Recent Files"
-              "Telescope oldfiles"
-              "fg"
-            ]
-            [
-              " File Browser"
-              "Telescope file_browser"
-              "fe"
-            ]
-            [
-              "Tree"
-              "Neotree toggle"
-              "e"
-            ]
-            [
-              " Copilot Chat"
-              "CopilotChat"
-              "ct"
-            ]
-            [
-              "󰧑 SecondBrain"
-              "edit ~/projects/personal/SecondBrain"
-              "sb"
-            ]
-          ];
-          highlight = "string";
-          defaultColor = "";
-          oldfilesAmount = 0;
-        };
+      body = {
+        type = "mapping";
+        oldfiles_directory = false;
+        align = "center";
+        fold_section = false;
+        title = "Menu";
+        margin = 5;
+        content = [
+          [
+            " Find File"
+            "Telescope find_files"
+            "ff"
+          ]
+          [
+            "󰍉 Find Word"
+            "Telescope live_grep"
+            "fr"
+          ]
+          [
+            " Recent Files"
+            "Telescope oldfiles"
+            "fg"
+          ]
+          [
+            " File Browser"
+            "Telescope file_browser"
+            "fe"
+          ]
+          [
+            "Tree"
+            "Neotree toggle"
+            "e"
+          ]
+          [
+            " Copilot Chat"
+            "CopilotChat"
+            "ct"
+          ]
+          [
+            "󰧑 SecondBrain"
+            "edit ~/projects/personal/SecondBrain"
+            "sb"
+          ]
+        ];
+        highlight = "string";
+        default_color = "";
+        oldfiles_amount = 0;
       };
 
       options = {
