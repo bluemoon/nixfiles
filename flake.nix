@@ -85,5 +85,39 @@
           })
         ];
       };
+
+      ####### Mac Studio Config #######
+      darwinConfigurations."bradford-macstudio" = darwin.lib.darwinSystem {
+        system = "aarch64-darwin";
+        specialArgs = { inherit self inputs; };
+        modules = [
+          ./modules/mac.nix
+          home-manager.darwinModules.home-manager
+          {
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              extraSpecialArgs = { inherit inputs; };
+              users.bradford = {
+                imports = [
+                  inputs.base16.hmModule
+                  ./modules/home.nix
+                ];
+              };
+            };
+          }
+          ({ config, pkgs, lib, ... }: {
+            nix.enable = true;
+            security.pam.services.sudo_local.touchIdAuth = true;
+            nixpkgs = {
+              config.allowBroken = true;
+              config.allowUnfree = true;
+              overlays = with inputs; [
+                nur.overlays.default
+              ];
+            };
+          })
+        ];
+      };
     };
 }

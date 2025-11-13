@@ -28,12 +28,19 @@
    git clone git@github.com:bluemoon/nixfiles.git ~/.config/nixpkgs
    ```
 
-5. Install the flake
+5. Install the flake (choose the host that matches the machine)
 
    ```
    cd ~/.config/nixpkgs
    nix build .#darwinConfigurations.bradford-mbp.system
    ./result/sw/bin/darwin-rebuild switch --flake .#bradford-mbp
+   ```
+
+   On the Mac Studio, swap the host key:
+
+   ```
+   nix build .#darwinConfigurations.bradford-macstudio.system
+   ./result/sw/bin/darwin-rebuild switch --flake .#bradford-macstudio
    ```
 
 6. Install Homebrew
@@ -82,12 +89,21 @@
 
 ## Common Operations
 
+### Switch Between Hosts
+
+Each machine has its own darwin configuration inside the flake. Run the rebuild command with the matching host key:
+
+```bash
+darwin-rebuild switch --flake .#bradford-mbp          # Laptop
+darwin-rebuild switch --flake .#bradford-macstudio    # Mac Studio
+```
+
 ### Update Configuration
 
 After making changes to any `.nix` files:
 
 ```bash
-darwin-rebuild switch --flake .#bradford-mbp
+darwin-rebuild switch --flake .#<host>
 ```
 
 ### Update All Dependencies
@@ -97,19 +113,19 @@ darwin-rebuild switch --flake .#bradford-mbp
 nix flake update
 
 # Apply changes
-darwin-rebuild switch --flake .#bradford-mbp
+darwin-rebuild switch --flake .#<host>
 ```
 
 ### Add a New Package
 
 1. Edit `modules/home.nix`
 2. Add package to `home.packages` list
-3. Run `darwin-rebuild switch --flake .#bradford-mbp`
+3. Run `darwin-rebuild switch --flake .#<host>`
 
 ### Modify Program Configuration
 
 1. Edit the relevant file in `modules/home-manager/`
-2. Run `darwin-rebuild switch --flake .#bradford-mbp`
+2. Run `darwin-rebuild switch --flake .#<host>`
 
 ## Package Management
 
@@ -221,4 +237,3 @@ Before major changes, backup:
 ## References
 
 1. https://github.com/shaunsingh/nix-darwin-dotfiles/blob/main/nix-config.org
-
