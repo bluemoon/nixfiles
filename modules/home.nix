@@ -16,12 +16,33 @@
   # home.homeDirectory = "/Users/bradford";
   home.sessionVariables = {
     EDITOR = "nvim";
+    PNPM_HOME = "$HOME/.local/bin";
+    # SSL certificates for all programs
+    SSL_CERT_FILE = "/etc/ssl/certs/ca-certificates.crt";
+    NIX_SSL_CERT_FILE = "/etc/ssl/certs/ca-certificates.crt";
+    CURL_CA_BUNDLE = "/etc/ssl/certs/ca-certificates.crt";
+    GIT_SSL_CAINFO = "/etc/ssl/certs/ca-certificates.crt";
   };
+  home.sessionPath = [
+    "$HOME/.local/bin"
+  ];
   #
   programs.direnv = {
     enable = true;
     # enableFishIntegration = true;
     nix-direnv.enable = true;
+  };
+
+  programs.atuin = {
+    enable = true;
+    enableFishIntegration = true;
+    flags = [ "--disable-up-arrow" ];
+    settings = {
+      auto_sync = false;
+      search_mode = "fuzzy";
+      filter_mode = "global";
+      style = "compact";
+    };
   };
 
   programs.bat = {
@@ -81,21 +102,8 @@
     enable = true;
     enableDefaultConfig = false;
     matchBlocks."*" = {
-      forwardAgent = false;
-      addKeysToAgent = "no";
-      compression = false;
-      serverAliveInterval = 0;
-      serverAliveCountMax = 3;
-      hashKnownHosts = false;
-      userKnownHostsFile = "~/.ssh/known_hosts";
-      controlMaster = "no";
-      controlPath = "~/.ssh/master-%r@%n:%p";
-      controlPersist = "no";
+      identityAgent = "\"~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock\"";
     };
-    extraConfig = ''
-      Host *
-        IdentityAgent "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
-    '';
   };
 
   # This value determines the Home Manager release that your
@@ -116,6 +124,8 @@
     # pkgs.direnv
     pkgs.ast-grep
     pkgs.fd
+    pkgs.go
+    pkgs.gh
     pkgs.gnupg
     pkgs.htop
     pkgs.jq
@@ -124,12 +134,16 @@
     pkgs.nodejs
     pkgs.nixfmt-classic
     pkgs.nix-prefetch
+    pkgs.openssl
     pkgs.protobuf
+    pkgs.pkg-config
     pkgs.ripgrep
     pkgs.ripgrep-all
+    pkgs.ruff
     pkgs.nil
     pkgs.rustup
     pkgs.tmux
+    pkgs.tree
     pkgs.tree-sitter
     pkgs.tree-sitter-grammars.tree-sitter-nix
     pkgs.stylua
@@ -142,7 +156,9 @@
     pkgs.kamal
     pkgs._1password-cli
     pkgs._1password-gui
+    pkgs.raycast
     pkgs.zig
+    pkgs.uv
     pkgs.caddy
     pkgs.cmake
     pkgs.colima
@@ -151,10 +167,62 @@
     pkgs.pyrefly
     # pkgs.jujutsu
     pkgs.codex
+    pkgs.opencode
     pkgs.postgresql_16
     pkgs.granted
+    pkgs.grpcurl
     pkgs.overmind
     pkgs.python3Packages.localstack-client
+    pkgs.kcat
+    pkgs.age
+    pkgs.sops
+    pkgs.kubectl
+
+    # Shell enhancements
+    pkgs.starship
+    pkgs.pay-respects
+    pkgs.tldr
+
+    # System monitoring
+    pkgs.btop
+    pkgs.procs
+    pkgs.duf
+    pkgs.dust
+    pkgs.bandwhich
+
+    # File management
+    pkgs.yazi
+
+    # Network/HTTP
+    pkgs.xh
+    pkgs.doggo
+
+    # Data processing
+    pkgs.yq-go
+    pkgs.miller
+    pkgs.jless
+
+    # Git/Diff
+    pkgs.lazygit
+    pkgs.delta
+    pkgs.difftastic
+
+    # Dev tools
+    pkgs.hyperfine
+    pkgs.tokei
+    pkgs.watchexec
+
+    # Containers
+    pkgs.lazydocker
+    pkgs.k9s
+
+    # Misc
+    pkgs.glow
+    pkgs.fastfetch
+    (pkgs.snowflake-cli.overrideAttrs (old: {
+      doCheck = false;
+      doInstallCheck = false;
+    }))
     (pkgs.awscli2.overrideAttrs (old: {
       doCheck = false;
       doInstallCheck = false;

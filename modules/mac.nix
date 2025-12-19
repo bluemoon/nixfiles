@@ -28,6 +28,7 @@ in {
     ${primaryUser} = {
       home = primaryHome;
       shell = pkgs.fish;
+      uid = 501;
     };
   };
 

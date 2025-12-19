@@ -10,10 +10,11 @@
 
       # User paths
       fish_add_path -g $HOME/bin
-      fish_add_path -g $HOME/.local/bin
+      fish_add_path $HOME/.local/bin
 
       # Development tools
       fish_add_path -g $HOME/.cargo/bin
+      fish_add_path -g $HOME/go/bin
 
       # Python 3.11
       fish_add_path -g /Library/Frameworks/Python.framework/Versions/3.11/bin
@@ -31,6 +32,7 @@
       any-nix-shell fish --info-right | source
       set -xg NIX_PATH $HOME/.nix-defexpr/channels:/nix/var/nix/profiles/per-user/root/channels
       set -xg NIXPKGS_ALLOW_UNFREE 1
+      set -gx SSH_AUTH_SOCK "$HOME/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
       eval (zoxide init fish)
       eval (direnv hook fish)
 
@@ -91,31 +93,18 @@
         end
       end
 
-      # FZF configuration
+      # FZF configuration (Ctrl+R handled by atuin)
       if type -q fzf
         # Use fd for better file finding if available
         if type -q fd
           set -gx FZF_DEFAULT_COMMAND 'fd --type f --hidden --follow --exclude .git'
           set -gx FZF_CTRL_T_COMMAND "$FZF_DEFAULT_COMMAND"
         end
-        
+
         # Better preview with bat if available
         if type -q bat
           set -gx FZF_CTRL_T_OPTS "--preview 'bat --style=numbers --color=always --line-range :500 {}'"
         end
-        
-        # Ctrl+R for history search
-        bind \cr 'commandline -f history-search-backward'
-        
-        # Custom fzf history widget
-        function fzf_history_widget
-          set -l cmd (history | fzf --tiebreak=index --query=(commandline) | string split -m1 ' ')[2]
-          if test -n "$cmd"
-            commandline -r $cmd
-          end
-          commandline -f repaint
-        end
-        bind \cr fzf_history_widget
       end
     '';
 
@@ -283,6 +272,166 @@
 
       gwch = "git whatchanged -p --abbrev-commit --pretty=medium";
       gwip = "git add -A; git rm \$(git ls-files --deleted) 2> /dev/null; git commit --no-verify --no-gpg-sign -m '--wip-- [skip ci]'";
+
+      # Kubernetes shortcuts (matches oh-my-zsh kubectl plugin)
+      k = "kubectl";
+      kca = "kubectl --all-namespaces";
+      kaf = "kubectl apply -f";
+      keti = "kubectl exec -t -i";
+
+      # Context management (less needed with direnv)
+      kcuc = "kubectl config use-context";
+      kcsc = "kubectl config set-context";
+      kcdc = "kubectl config delete-context";
+      kccc = "kubectl config current-context";
+      kcgc = "kubectl config get-contexts";
+      kcn = "kubectl config set-context --current --namespace";
+
+      # Delete
+      kdel = "kubectl delete";
+      kdelf = "kubectl delete -f";
+
+      # Get all
+      kga = "kubectl get all";
+      kgaa = "kubectl get all --all-namespaces";
+
+      # Pods
+      kgp = "kubectl get pods";
+      kgpl = "kubectl get pods -l";
+      kgpn = "kubectl get pods -n";
+      kgpsl = "kubectl get pods --show-labels";
+      kgpa = "kubectl get pods --all-namespaces";
+      kgpw = "kubectl get pods --watch";
+      kgpwide = "kubectl get pods -o wide";
+      kgpall = "kubectl get pods --all-namespaces -o wide";
+      kep = "kubectl edit pods";
+      kdp = "kubectl describe pods";
+      kdelp = "kubectl delete pods";
+
+      # Services
+      kgs = "kubectl get svc";
+      kgsa = "kubectl get svc --all-namespaces";
+      kgsw = "kubectl get svc --watch";
+      kgswide = "kubectl get svc -o wide";
+      kes = "kubectl edit svc";
+      kds = "kubectl describe svc";
+      kdels = "kubectl delete svc";
+
+      # Ingress
+      kgi = "kubectl get ingress";
+      kgia = "kubectl get ingress --all-namespaces";
+      kei = "kubectl edit ingress";
+      kdi = "kubectl describe ingress";
+      kdeli = "kubectl delete ingress";
+
+      # Namespaces
+      kgns = "kubectl get namespaces";
+      kens = "kubectl edit namespace";
+      kdns = "kubectl describe namespace";
+      kdelns = "kubectl delete namespace";
+
+      # ConfigMaps
+      kgcm = "kubectl get configmaps";
+      kgcma = "kubectl get configmaps --all-namespaces";
+      kecm = "kubectl edit configmap";
+      kdcm = "kubectl describe configmap";
+      kdelcm = "kubectl delete configmap";
+
+      # Secrets
+      kgsec = "kubectl get secret";
+      kgseca = "kubectl get secret --all-namespaces";
+      kdsec = "kubectl describe secret";
+      kdelsec = "kubectl delete secret";
+
+      # Deployments
+      kgd = "kubectl get deployment";
+      kgda = "kubectl get deployment --all-namespaces";
+      kgdw = "kubectl get deployment --watch";
+      kgdwide = "kubectl get deployment -o wide";
+      ked = "kubectl edit deployment";
+      kdd = "kubectl describe deployment";
+      kdeld = "kubectl delete deployment";
+      ksd = "kubectl scale deployment";
+      krsd = "kubectl rollout status deployment";
+      krrd = "kubectl rollout restart deployment";
+
+      # ReplicaSets
+      kgrs = "kubectl get replicaset";
+      kdrs = "kubectl describe replicaset";
+      kers = "kubectl edit replicaset";
+
+      # Rollout
+      krh = "kubectl rollout history";
+      kru = "kubectl rollout undo";
+
+      # StatefulSets
+      kgss = "kubectl get statefulset";
+      kgssa = "kubectl get statefulset --all-namespaces";
+      kgssw = "kubectl get statefulset --watch";
+      kgsswide = "kubectl get statefulset -o wide";
+      kess = "kubectl edit statefulset";
+      kdss = "kubectl describe statefulset";
+      kdelss = "kubectl delete statefulset";
+      ksss = "kubectl scale statefulset";
+      krsss = "kubectl rollout status statefulset";
+      krrss = "kubectl rollout restart statefulset";
+
+      # DaemonSets
+      kgds = "kubectl get daemonset";
+      kgdsa = "kubectl get daemonset --all-namespaces";
+      kgdsw = "kubectl get daemonset --watch";
+      keds = "kubectl edit daemonset";
+      kdds = "kubectl describe daemonset";
+      kdelds = "kubectl delete daemonset";
+
+      # Jobs & CronJobs
+      kgcj = "kubectl get cronjob";
+      kecj = "kubectl edit cronjob";
+      kdcj = "kubectl describe cronjob";
+      kdelcj = "kubectl delete cronjob";
+      kgj = "kubectl get job";
+      kej = "kubectl edit job";
+      kdj = "kubectl describe job";
+      kdelj = "kubectl delete job";
+
+      # Nodes
+      kgno = "kubectl get nodes";
+      kgnosl = "kubectl get nodes --show-labels";
+      keno = "kubectl edit node";
+      kdno = "kubectl describe node";
+      kdelno = "kubectl delete node";
+
+      # PVC
+      kgpvc = "kubectl get pvc";
+      kgpvca = "kubectl get pvc --all-namespaces";
+      kgpvcw = "kubectl get pvc --watch";
+      kepvc = "kubectl edit pvc";
+      kdpvc = "kubectl describe pvc";
+      kdelpvc = "kubectl delete pvc";
+
+      # Service Accounts
+      kdsa = "kubectl describe sa";
+      kdelsa = "kubectl delete sa";
+
+      # Events
+      kge = "kubectl get events --sort-by='.lastTimestamp'";
+      kgew = "kubectl get events --sort-by='.lastTimestamp' --watch";
+
+      # Logs
+      kl = "kubectl logs";
+      kl1h = "kubectl logs --since 1h";
+      kl1m = "kubectl logs --since 1m";
+      kl1s = "kubectl logs --since 1s";
+      klf = "kubectl logs -f";
+      klf1h = "kubectl logs --since 1h -f";
+      klf1m = "kubectl logs --since 1m -f";
+      klf1s = "kubectl logs --since 1s -f";
+
+      # Other
+      kcp = "kubectl cp";
+      kpf = "kubectl port-forward";
+      ktp = "kubectl top pods";
+      ktn = "kubectl top nodes";
     };
   };
 

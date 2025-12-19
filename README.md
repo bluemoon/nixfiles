@@ -131,11 +131,87 @@ darwin-rebuild switch --flake .#<host>
 
 ### System Packages (via Nix)
 
-Packages are defined in `modules/home.nix` under `home.packages`. These include:
+Packages are defined in `modules/home.nix` under `home.packages`.
 
-- Development tools (ripgrep, fd, tree-sitter, etc.)
-- Language servers (rust-analyzer, rnix-lsp, lua-language-server)
-- CLI utilities (bat, exa, fzf, zoxide)
+#### CLI Toolkit
+
+| Tool | Description |
+|------|-------------|
+| **Shell** | |
+| fish | Modern shell with autosuggestions and syntax highlighting |
+| starship | Fast, customizable prompt written in Rust |
+| atuin | SQLite-backed shell history with fuzzy search (Ctrl+R) |
+| pay-respects | Fix previous command with `f` (thefuck replacement) |
+| tldr | Simplified man pages with examples |
+| **Multiplexer** | |
+| tmux | Terminal multiplexer for sessions/windows/panes |
+| **Monitoring** | |
+| btop | Resource monitor (CPU, mem, disk, network) |
+| procs | Modern `ps` replacement with color and tree view |
+| duf | Disk usage (`df` replacement) with nice output |
+| dust | Disk usage analyzer (`du` replacement) with tree view |
+| bandwhich | Bandwidth monitor by process/connection |
+| **Navigation** | |
+| yazi | Terminal file manager with image preview |
+| zoxide | Smarter `cd` that learns your habits (`z foo`) |
+| fzf | Fuzzy finder for files, history, everything |
+| eza | Modern `ls` with git status and icons |
+| **Search** | |
+| ripgrep | Fast grep replacement (`rg pattern`) |
+| fd | Fast find replacement (`fd pattern`) |
+| bat | Cat with syntax highlighting and git diff |
+| ast-grep | Structural code search using AST patterns |
+| **Git** | |
+| lazygit | Terminal UI for git |
+| delta | Syntax-highlighting pager for git diffs |
+| difftastic | Structural diff that understands syntax |
+| **Editor** | |
+| neovim | Hyperextensible vim (configured via nixvim) |
+| **Network/HTTP** | |
+| xh | HTTPie-like HTTP client in Rust |
+| doggo | DNS client with nice output (`doggo example.com`) |
+| grpcurl | Curl for gRPC services |
+| **Data** | |
+| jq | JSON processor |
+| yq | YAML/TOML processor (jq for YAML) |
+| miller | CSV/JSON/etc swiss army knife |
+| jless | Interactive JSON viewer |
+| duckdb | In-process SQL OLAP database |
+| **Containers** | |
+| docker | Container runtime |
+| colima | Docker Desktop alternative for macOS |
+| lazydocker | Terminal UI for docker |
+| k9s | Terminal UI for Kubernetes |
+| kubectl | Kubernetes CLI |
+| **Dev Tools** | |
+| hyperfine | Benchmarking tool (`hyperfine 'cmd1' 'cmd2'`) |
+| tokei | Code statistics (lines of code by language) |
+| watchexec | Run command on file changes |
+| **Security** | |
+| age | Modern file encryption |
+| sops | Secrets management for config files |
+| gnupg | GPG encryption |
+| 1password-cli | 1Password CLI (`op`) |
+| **Misc** | |
+| glow | Markdown renderer in terminal |
+| fastfetch | System info display (neofetch alternative) |
+| direnv | Per-directory environment variables |
+
+#### Languages & Runtimes
+
+- **Rust**: rustup
+- **Go**: go
+- **Python**: uv, ruff, pyrefly
+- **Node**: nodejs, pnpm, yarn
+- **Zig**: zig
+- **Ruby**: ruby
+- **Lua**: luajit, stylua
+
+#### AI Coding Assistants
+
+- claude-code
+- codex
+- opencode
 
 ### Homebrew Packages
 
