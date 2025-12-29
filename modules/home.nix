@@ -33,18 +33,6 @@
     nix-direnv.enable = true;
   };
 
-  programs.atuin = {
-    enable = true;
-    enableFishIntegration = true;
-    flags = [ "--disable-up-arrow" ];
-    settings = {
-      auto_sync = false;
-      search_mode = "fuzzy";
-      filter_mode = "global";
-      style = "compact";
-    };
-  };
-
   programs.bat = {
     enable = true;
   };
@@ -161,6 +149,7 @@
     pkgs.uv
     pkgs.caddy
     pkgs.cmake
+    pkgs.curl
     pkgs.colima
     pkgs.docker
     pkgs.duckdb
@@ -215,10 +204,13 @@
     # Containers
     pkgs.lazydocker
     pkgs.k9s
+    pkgs.skopeo
+    pkgs.fluxcd
 
     # Misc
     pkgs.glow
     pkgs.fastfetch
+    pkgs.gnuplot
     (pkgs.snowflake-cli.overrideAttrs (old: {
       doCheck = false;
       doInstallCheck = false;

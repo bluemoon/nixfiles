@@ -93,7 +93,60 @@
         end
       end
 
-      # FZF configuration (Ctrl+R handled by atuin)
+      # Git worktree helpers (inspired by DHH)
+      # gwa <branch> - create worktree with new branch (prefixed with bradford/)
+      function gwa
+        if test (count $argv) -lt 1
+          echo "Usage: gwa <branch>"
+          return 1
+        end
+        set -l branch "bradford/$argv[1]"
+        set -l repo (basename (pwd))
+        set -l path "../$repo--$argv[1]"
+        git worktree add -b "$branch" "$path"
+        cd "$path"
+      end
+
+      # gwd - remove current worktree and delete branch
+      function gwd
+        read -l -P "Remove worktree and delete branch? [y/N] " confirm
+        if test "$confirm" != "y" -a "$confirm" != "Y"
+          return 1
+        end
+        set -l current (pwd)
+        set -l root (string split --max 1 -- "--" (basename "$current"))[1]
+        set -l branch (string split --max 1 -- "--" (basename "$current"))[2]
+        if test -z "$branch"
+          echo "Not in a worktree (expected format: repo--branch)"
+          return 1
+        end
+        cd "../$root"
+        git worktree remove "$current"
+        git branch -D "$branch"
+      end
+
+      # gwpr <PR> - create worktree for a pull request
+      function gwpr
+        if test (count $argv) -lt 1
+          echo "Usage: gwpr <PR_NUMBER> [<REMOTE>]"
+          return 1
+        end
+        set -l pr $argv[1]
+        set -l remote (test (count $argv) -ge 2; and echo $argv[2]; or echo origin)
+        set -l branch (gh pr view "$pr" --json headRefName -q .headRefName)
+        if test -z "$branch"
+          echo "Failed to get branch for PR #$pr"
+          return 1
+        end
+        set -l repo (basename (pwd))
+        set -l path "../$repo--$branch"
+        git fetch "$remote" "$branch"
+        git worktree add "$path" "$branch"
+        cd "$path"
+        echo "PR #$pr: $branch"
+      end
+
+      # FZF configuration
       if type -q fzf
         # Use fd for better file finding if available
         if type -q fd
@@ -105,6 +158,16 @@
         if type -q bat
           set -gx FZF_CTRL_T_OPTS "--preview 'bat --style=numbers --color=always --line-range :500 {}'"
         end
+
+        # Ctrl+R for history search
+        function fzf_history_widget
+          set -l cmd (history | fzf --tiebreak=index --query=(commandline))
+          if test -n "$cmd"
+            commandline -r $cmd
+          end
+          commandline -f repaint
+        end
+        bind \cr fzf_history_widget
       end
     '';
 
@@ -269,6 +332,12 @@
       gupa = "git pull --rebase --autostash";
       gupav = "git pull --rebase --autostash -v";
       glum = "git pull upstream main";
+
+      gwt = "git worktree";
+      gwta = "git worktree add";
+      gwtl = "git worktree list";
+      gwtr = "git worktree remove";
+      gwtm = "git worktree move";
 
       gwch = "git whatchanged -p --abbrev-commit --pretty=medium";
       gwip = "git add -A; git rm \$(git ls-files --deleted) 2> /dev/null; git commit --no-verify --no-gpg-sign -m '--wip-- [skip ci]'";
