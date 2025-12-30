@@ -127,6 +127,69 @@ darwin-rebuild switch --flake .#<host>
 1. Edit the relevant file in `modules/home-manager/`
 2. Run `darwin-rebuild switch --flake .#<host>`
 
+## Shell Quick Reference
+
+### Git Worktrees
+
+| Command | Description |
+|---------|-------------|
+| `gwa feature-x` | Create worktree at `../repo--feature-x` with branch `bradford/feature-x` |
+| `gwd` | Remove current worktree and delete its branch |
+| `gwpr 123` | Create worktree for PR #123 |
+| `gwtl` | List all worktrees |
+
+### Navigation
+
+| Command | Description |
+|---------|-------------|
+| `z foo` | Jump to directory matching "foo" (zoxide) |
+| `yazi` | Terminal file manager |
+| `ctrl+r` | Fuzzy search command history |
+| `ctrl+t` | Fuzzy find files |
+
+### Git Shortcuts
+
+| Command | Description |
+|---------|-------------|
+| `gst` | `git status` |
+| `gco` | `git checkout` |
+| `gcb feature` | `git checkout -b feature` |
+| `gp` | `git push` |
+| `gl` | `git pull` |
+| `glog` | `git log --oneline --decorate --graph` |
+| `gd` | `git diff` |
+| `gds` | `git diff --staged` |
+| `gc!` | `git commit --amend` |
+| `grb` | `git rebase` |
+| `grbi` | `git rebase -i` |
+| `gsta` | `git stash push` |
+| `gstp` | `git stash pop` |
+| `lazygit` | Terminal UI for git |
+
+### Kubernetes
+
+| Command | Description |
+|---------|-------------|
+| `k` | `kubectl` |
+| `kgp` | `kubectl get pods` |
+| `kgd` | `kubectl get deployment` |
+| `kgs` | `kubectl get svc` |
+| `kl` | `kubectl logs` |
+| `klf` | `kubectl logs -f` |
+| `k9s` | Terminal UI for Kubernetes |
+
+### Misc
+
+| Command | Description |
+|---------|-------------|
+| `f` | Fix previous command (pay-respects) |
+| `tldr cmd` | Simplified man page with examples |
+| `bat file` | Cat with syntax highlighting |
+| `rg pattern` | Fast grep |
+| `fd pattern` | Fast find |
+| `xh url` | HTTP client |
+| `jless file.json` | Interactive JSON viewer |
+
 ## Package Management
 
 ### System Packages (via Nix)
@@ -141,7 +204,6 @@ Packages are defined in `modules/home.nix` under `home.packages`.
 |------|-------------|
 | fish | Modern shell with autosuggestions and syntax highlighting |
 | starship | Fast, customizable prompt written in Rust |
-| atuin | SQLite-backed shell history with fuzzy search (Ctrl+R) |
 | pay-respects | Fix previous command with `f` (thefuck replacement) |
 | tldr | Simplified man pages with examples |
 | tmux | Terminal multiplexer for sessions/windows/panes |

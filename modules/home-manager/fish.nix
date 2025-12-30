@@ -93,7 +93,7 @@
         end
       end
 
-      # Git worktree helpers (inspired by DHH)
+      # Git worktree helpers
       # gwa <branch> - create worktree with new branch (prefixed with bradford/)
       function gwa
         if test (count $argv) -lt 1
@@ -101,26 +101,29 @@
           return 1
         end
         set -l branch "bradford/$argv[1]"
-        set -l repo (basename (pwd))
-        set -l path "../$repo--$argv[1]"
+        set -l root (git rev-parse --show-toplevel)
+        set -l path "$root/.worktrees/$argv[1]"
+        mkdir -p (dirname "$path")
         git worktree add -b "$branch" "$path"
         cd "$path"
       end
 
       # gwd - remove current worktree and delete branch
       function gwd
-        read -l -P "Remove worktree and delete branch? [y/N] " confirm
+        set -l current (pwd)
+        set -l root (git rev-parse --show-toplevel 2>/dev/null)
+        if not string match -q "*.worktrees/*" "$current"
+          echo "Not in a .worktrees directory"
+          return 1
+        end
+        set -l branch (git branch --show-current)
+        read -l -P "Remove worktree and delete branch '$branch'? [y/N] " confirm
         if test "$confirm" != "y" -a "$confirm" != "Y"
           return 1
         end
-        set -l current (pwd)
-        set -l root (string split --max 1 -- "--" (basename "$current"))[1]
-        set -l branch (string split --max 1 -- "--" (basename "$current"))[2]
-        if test -z "$branch"
-          echo "Not in a worktree (expected format: repo--branch)"
-          return 1
-        end
-        cd "../$root"
+        # Go to main worktree
+        set -l main_root (string replace -r '/.worktrees/.*' "" "$current")
+        cd "$main_root"
         git worktree remove "$current"
         git branch -D "$branch"
       end
@@ -138,37 +141,15 @@
           echo "Failed to get branch for PR #$pr"
           return 1
         end
-        set -l repo (basename (pwd))
-        set -l path "../$repo--$branch"
+        set -l root (git rev-parse --show-toplevel)
+        set -l path "$root/.worktrees/$branch"
+        mkdir -p (dirname "$path")
         git fetch "$remote" "$branch"
         git worktree add "$path" "$branch"
         cd "$path"
         echo "PR #$pr: $branch"
       end
 
-      # FZF configuration
-      if type -q fzf
-        # Use fd for better file finding if available
-        if type -q fd
-          set -gx FZF_DEFAULT_COMMAND 'fd --type f --hidden --follow --exclude .git'
-          set -gx FZF_CTRL_T_COMMAND "$FZF_DEFAULT_COMMAND"
-        end
-
-        # Better preview with bat if available
-        if type -q bat
-          set -gx FZF_CTRL_T_OPTS "--preview 'bat --style=numbers --color=always --line-range :500 {}'"
-        end
-
-        # Ctrl+R for history search
-        function fzf_history_widget
-          set -l cmd (history | fzf --tiebreak=index --query=(commandline))
-          if test -n "$cmd"
-            commandline -r $cmd
-          end
-          commandline -f repaint
-        end
-        bind \cr fzf_history_widget
-      end
     '';
 
     shellAliases = {

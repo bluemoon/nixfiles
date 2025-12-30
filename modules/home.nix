@@ -45,12 +45,6 @@
     enableZshIntegration = true;
   };
 
-  # FZF
-  programs.fzf = {
-    enable = true;
-    enableZshIntegration = true;
-    enableFishIntegration = true;
-  };
 
   # ZOxide
   programs.zoxide = {
@@ -59,6 +53,11 @@
   };
 
   programs.nix-index = {
+    enable = true;
+    enableFishIntegration = true;
+  };
+
+  programs.atuin = {
     enable = true;
     enableFishIntegration = true;
   };
@@ -190,6 +189,7 @@
     pkgs.yq-go
     pkgs.miller
     pkgs.jless
+    pkgs.parquet-tools
 
     # Git/Diff
     pkgs.lazygit
