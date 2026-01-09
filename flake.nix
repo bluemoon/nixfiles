@@ -63,7 +63,7 @@
               useGlobalPkgs = true;
               useUserPackages = true;
               extraSpecialArgs = { inherit inputs; };
-              users.bradfordtoney = {
+              users.bradford = {
                 imports = [
                   inputs.base16.hmModule
                   ./modules/home.nix
@@ -72,9 +72,14 @@
               };
             };
           }
+          ({ ... }: {
+            system.primaryUser = "bradford";
+          })
           ({ config, pkgs, lib, ... }: {
             nix.enable = true;
             security.pam.services.sudo_local.touchIdAuth = true;
+            # Match existing nixbld group GID from previous Nix installation
+            ids.gids.nixbld = 30000;
             nixpkgs = {
               config.allowBroken = true;
               config.allowUnfree = true;
