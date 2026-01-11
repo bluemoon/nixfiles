@@ -2,8 +2,7 @@
 let
   primaryUser = config.system.primaryUser;
   hasPrimaryUser = primaryUser != null;
-  primaryHome =
-    if hasPrimaryUser then "/Users/${primaryUser}" else null;
+  primaryHome = if hasPrimaryUser then "/Users/${primaryUser}" else null;
 in {
 
   # Default primary user; hosts can override.
@@ -81,7 +80,7 @@ in {
     package = pkgs.skhd;
     skhdConfig = ''
       # open terminal
-      cmd - return : alacritty
+      cmd - return : ghostty
       # open emacs
       cmd - e : emacs
       cmd + lalt -e : emacsclient --eval "(emacs-everywhere)"

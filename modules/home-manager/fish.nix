@@ -45,11 +45,23 @@
         source ~/.config/fish/completions/granted.fish
       end
 
-      function rebuild-mbp
-        pushd ~/.config/nixpkgs
-        eval nix build ~/.config/nixpkgs#darwinConfigurations.bradford-mbp.system
-        eval ./result/sw/bin/darwin-rebuild switch --flake .#bradford-mbp
-        popd
+      function nixswitch
+        if not test -f /etc/nix-host
+          echo "Error: /etc/nix-host not found. Run darwin-rebuild manually first."
+          return 1
+        end
+        set -l host (cat /etc/nix-host)
+        sudo darwin-rebuild switch --flake ~/.config/nixpkgs#$host
+      end
+
+      function nixup
+        if not test -f /etc/nix-host
+          echo "Error: /etc/nix-host not found. Run darwin-rebuild manually first."
+          return 1
+        end
+        set -l host (cat /etc/nix-host)
+        nix flake update ~/.config/nixpkgs
+        and sudo darwin-rebuild switch --flake ~/.config/nixpkgs#$host
       end
 
       if type -q rbenv
@@ -162,6 +174,10 @@
     };
 
     shellAbbrs = {
+      # Quick jumps
+      nx = "cd ~/.config/nixpkgs";
+
+
       # Git shortcuts
       gapa = "git add --patch";
       gau = "git add --update";

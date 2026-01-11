@@ -1,10 +1,4 @@
-{
-  config,
-  pkgs,
-  home-manager,
-  inputs,
-  ...
-}:
+{ config, pkgs, home-manager, inputs, ... }:
 
 {
   # Let Home Manager install and manage itself.
@@ -23,9 +17,7 @@
     CURL_CA_BUNDLE = "/etc/ssl/certs/ca-certificates.crt";
     GIT_SSL_CAINFO = "/etc/ssl/certs/ca-certificates.crt";
   };
-  home.sessionPath = [
-    "$HOME/.local/bin"
-  ];
+  home.sessionPath = [ "$HOME/.local/bin" ];
   #
   programs.direnv = {
     enable = true;
@@ -33,9 +25,19 @@
     nix-direnv.enable = true;
   };
 
-  programs.bat = {
+  programs.atuin = {
     enable = true;
+    enableFishIntegration = true;
+    flags = [ "--disable-up-arrow" ];
+    settings = {
+      auto_sync = false;
+      search_mode = "fuzzy";
+      filter_mode = "global";
+      style = "compact";
+    };
   };
+
+  programs.bat = { enable = true; };
 
   # Better ls
   programs.eza = {
@@ -45,7 +47,6 @@
     enableZshIntegration = true;
   };
 
-
   # ZOxide
   programs.zoxide = {
     enable = true;
@@ -53,11 +54,6 @@
   };
 
   programs.nix-index = {
-    enable = true;
-    enableFishIntegration = true;
-  };
-
-  programs.atuin = {
     enable = true;
     enableFishIntegration = true;
   };
@@ -71,12 +67,8 @@
         email = "bradford.toney@gmail.com";
         signingkey = "9159E6B4C25B8F6B";
       };
-      alias = {
-        st = "status";
-      };
-      core = {
-        editor = "nvim";
-      };
+      alias = { st = "status"; };
+      core = { editor = "nvim"; };
       # TODO: Breaks Cargo?
       # url."ssh://git@github.com/".insteadOf = "https://github.com/";
       pull.rebase = true;
@@ -88,8 +80,17 @@
   programs.ssh = {
     enable = true;
     enableDefaultConfig = false;
-    matchBlocks."*" = {
-      identityAgent = "\"~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock\"";
+    includes = [ "/Users/bradford/.colima/ssh_config" ];
+    matchBlocks = {
+      "studio" = {
+        hostname = "mac-studio.home";
+        user = "bradford";
+        forwardAgent = true;
+      };
+      "*" = {
+        identityAgent = ''
+          "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"'';
+      };
     };
   };
 
@@ -110,6 +111,7 @@
     pkgs.any-nix-shell
     # pkgs.direnv
     pkgs.ast-grep
+    pkgs.bun
     pkgs.fd
     pkgs.go
     pkgs.gh
@@ -222,8 +224,5 @@
     inputs.nixvim-config.packages.${pkgs.system}.default
   ];
 
-  imports = [
-    ./home-manager/fish.nix
-    ./home-manager/tmux.nix
-  ];
+  imports = [ ./home-manager/fish.nix ./home-manager/tmux.nix ];
 }

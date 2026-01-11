@@ -62,8 +62,11 @@
             home-manager = {
               useGlobalPkgs = true;
               useUserPackages = true;
+              backupFileExtension = "backup";
               extraSpecialArgs = { inherit inputs; };
-              users.bradfordtoney = {
+              users.bradfordtoney = { lib, ... }: {
+                home.username = "bradfordtoney";
+                home.homeDirectory = lib.mkForce "/Users/bradford";
                 imports = [
                   inputs.base16.hmModule
                   ./modules/home.nix
@@ -74,6 +77,7 @@
           }
           ({ ... }: {
             system.primaryUser = "bradfordtoney";
+            environment.etc."nix-host".text = "bradford-mbp";
           })
           ({ config, pkgs, lib, ... }: {
             nix.enable = true;
@@ -113,6 +117,7 @@
           }
           ({ ... }: {
             system.primaryUser = "bradford";
+            environment.etc."nix-host".text = "bradford-macstudio";
           })
           ({ config, pkgs, lib, ... }: {
             nix.enable = true;

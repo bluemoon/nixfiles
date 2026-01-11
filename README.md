@@ -43,21 +43,6 @@
    ./result/sw/bin/darwin-rebuild switch --flake .#bradford-macstudio
    ```
 
-6. Install Homebrew
-
-   ```
-   bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
-   ```
-
-7. Install apps from Homebrew
-   > NOTEs:
-   >
-   > - Takes a **loooong** time
-   > - **Will ask for password a lot of times...**
-   ```
-   brew bundle --verbose --file ~/.config/nixpkgs/macos/Brewfile
-   ```
-
 ---
 
 ## System Architecture
@@ -77,14 +62,10 @@
 │   ├── mac.nix             # macOS system configuration
 │   ├── pam.nix             # PAM configuration for TouchID
 │   └── home-manager/       # Individual program configs
-│       ├── alacritty.nix
 │       ├── fish.nix
 │       ├── neovim.nix      # Neovim configuration
 │       └── tmux.nix
-├── programs/               # Program configurations
-│   └── neovim/            # Neovim lua config files
-└── macos/
-    └── Brewfile           # Homebrew packages
+└── nixvim/                 # Neovim configuration via nixvim
 ```
 
 ## Common Operations
@@ -317,21 +298,6 @@ Packages are defined in `modules/home.nix` under `home.packages`.
 - claude-code
 - codex
 - opencode
-
-### Homebrew Packages
-
-Some packages are still managed via Homebrew (defined in `macos/Brewfile`):
-
-- GUI applications (Firefox, Spotify, Slack)
-- macOS-specific tools (yabai, skhd)
-- Fonts
-
-To update Homebrew packages:
-
-```bash
-cd ~/.config/nixpkgs/macos
-brew bundle
-```
 
 ## Neovim Setup
 
