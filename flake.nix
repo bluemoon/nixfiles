@@ -63,7 +63,7 @@
               useGlobalPkgs = true;
               useUserPackages = true;
               extraSpecialArgs = { inherit inputs; };
-              users.bradford = {
+              users.bradfordtoney = {
                 imports = [
                   inputs.base16.hmModule
                   ./modules/home.nix
@@ -73,7 +73,7 @@
             };
           }
           ({ ... }: {
-            system.primaryUser = "bradford";
+            system.primaryUser = "bradfordtoney";
           })
           ({ config, pkgs, lib, ... }: {
             nix.enable = true;
