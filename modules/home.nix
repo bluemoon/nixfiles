@@ -155,7 +155,7 @@
     pkgs.docker
     pkgs.duckdb
     pkgs.pyrefly
-    # pkgs.jujutsu
+    pkgs.jujutsu
     pkgs.codex
     pkgs.opencode
     pkgs.postgresql_16
