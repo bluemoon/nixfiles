@@ -43,6 +43,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.nixvim.follows = "nixvim";
     };
+    agenix = {
+      url = "github:ryantm/agenix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
   outputs = { self, nixpkgs, darwin, home-manager, ... }@inputs:
     let pkgs = nixpkgs.legacyPackages."aarch64-darwin";
@@ -57,6 +61,8 @@
         specialArgs = { inherit self inputs; };
         modules = [
           ./modules/mac.nix
+          inputs.agenix.darwinModules.default
+          ./modules/secrets.nix
           home-manager.darwinModules.home-manager
           {
             home-manager = {
@@ -87,9 +93,7 @@
             nixpkgs = {
               config.allowBroken = true;
               config.allowUnfree = true;
-              overlays = with inputs; [
-                nur.overlays.default
-              ];
+              overlays = with inputs; [ nur.overlays.default ];
             };
           })
         ];
@@ -101,17 +105,17 @@
         specialArgs = { inherit self inputs; };
         modules = [
           ./modules/mac.nix
+          inputs.agenix.darwinModules.default
+          ./modules/secrets.nix
           home-manager.darwinModules.home-manager
           {
             home-manager = {
               useGlobalPkgs = true;
               useUserPackages = true;
+              backupFileExtension = "backup";
               extraSpecialArgs = { inherit inputs; };
               users.bradford = {
-                imports = [
-                  inputs.base16.hmModule
-                  ./modules/home.nix
-                ];
+                imports = [ inputs.base16.hmModule ./modules/home.nix ];
               };
             };
           }
@@ -125,9 +129,7 @@
             nixpkgs = {
               config.allowBroken = true;
               config.allowUnfree = true;
-              overlays = with inputs; [
-                nur.overlays.default
-              ];
+              overlays = with inputs; [ nur.overlays.default ];
             };
           })
         ];

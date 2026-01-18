@@ -19,6 +19,11 @@
   };
   home.sessionPath = [ "$HOME/.local/bin" ];
   #
+  programs.bash = {
+    enable = true;
+    shellAliases = { timeout = "gtimeout"; };
+  };
+
   programs.direnv = {
     enable = true;
     # enableFishIntegration = true;
@@ -74,6 +79,7 @@
       pull.rebase = true;
       push.autoSetupRemote = true;
       commit.gpgsign = true;
+      rerere.enabled = true;
     };
   };
 
@@ -87,10 +93,7 @@
         user = "bradford";
         forwardAgent = true;
       };
-      "*" = {
-        identityAgent = ''
-          "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"'';
-      };
+
     };
   };
 
@@ -108,6 +111,7 @@
   # home.file.".skhdrc".source = ..programs/skhd/skhdrc;
 
   home.packages = [
+    pkgs.coreutils-prefixed # GNU coreutils with g prefix (gtimeout, gdate, etc.)
     pkgs.any-nix-shell
     # pkgs.direnv
     pkgs.ast-grep

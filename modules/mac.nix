@@ -139,6 +139,10 @@ in {
     remapCapsLockToEscape = true;
   };
 
+  # Power management
+  power.sleep.display = 15; # Display off after 15 min
+  power.sleep.computer = "never"; # Never sleep
+
   # Autohide dock
   system.defaults = {
     dock = {

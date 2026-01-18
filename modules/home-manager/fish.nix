@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-{
+{ pkgs, ... }: {
   programs.fish = {
     enable = true;
     package = pkgs.fish;
@@ -32,7 +31,6 @@
       any-nix-shell fish --info-right | source
       set -xg NIX_PATH $HOME/.nix-defexpr/channels:/nix/var/nix/profiles/per-user/root/channels
       set -xg NIXPKGS_ALLOW_UNFREE 1
-      set -gx SSH_AUTH_SOCK "$HOME/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
       eval (zoxide init fish)
       eval (direnv hook fish)
 
@@ -51,7 +49,7 @@
           return 1
         end
         set -l host (cat /etc/nix-host)
-        sudo darwin-rebuild switch --flake ~/.config/nixpkgs#$host
+        sudo darwin-rebuild switch --flake $HOME/.config/nixpkgs#$host
       end
 
       function nixup
@@ -60,8 +58,8 @@
           return 1
         end
         set -l host (cat /etc/nix-host)
-        nix flake update ~/.config/nixpkgs
-        and sudo darwin-rebuild switch --flake ~/.config/nixpkgs#$host
+        nix flake update --flake $HOME/.config/nixpkgs
+        and sudo darwin-rebuild switch --flake $HOME/.config/nixpkgs#$host
       end
 
       if type -q rbenv
@@ -167,6 +165,7 @@
     shellAliases = {
       cat = "bat";
       vim = "nvim";
+      timeout = "gtimeout"; # GNU timeout from coreutils-prefixed
       g = "git";
       ga = "git add";
       gaa = "git add --all";
@@ -176,7 +175,6 @@
     shellAbbrs = {
       # Quick jumps
       nx = "cd ~/.config/nixpkgs";
-
 
       # Git shortcuts
       gapa = "git add --patch";
@@ -188,7 +186,8 @@
       gb = "git branch";
       gba = "git branch -a";
       gbd = "git branch -d";
-      gbda = "git for-each-ref --format '%(refname:short)' refs/heads | xargs git branch -d";
+      gbda =
+        "git for-each-ref --format '%(refname:short)' refs/heads | xargs git branch -d";
       gbD = "git branch -D";
       gbl = "git blame -b -w";
       gbnm = "git branch --no-merged";
@@ -225,7 +224,7 @@
       gd = "git diff";
       gdca = "git diff --cached";
       gdcw = "git diff --cached --word-diff";
-      gdct = "git describe --tags \$(git rev-list --tags --max-count=1)";
+      gdct = "git describe --tags $(git rev-list --tags --max-count=1)";
       gds = "git diff --staged";
       gdt = "git diff-tree --no-commit-id --name-only -r";
       gdw = "git diff --word-diff";
@@ -249,11 +248,16 @@
       glgga = "git log --graph --decorate --all";
       glgm = "git log --graph --max-count=10";
       glo = "git log --oneline --decorate";
-      glol = "git log --graph --pretty='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'";
-      glols = "git log --graph --pretty='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --stat";
-      glod = "git log --graph --pretty='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ad) %C(bold blue)<%an>%Creset'";
-      glods = "git log --graph --pretty='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ad) %C(bold blue)<%an>%Creset' --date=short";
-      glola = "git log --graph --pretty='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --all";
+      glol =
+        "git log --graph --pretty='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'";
+      glols =
+        "git log --graph --pretty='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --stat";
+      glod =
+        "git log --graph --pretty='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ad) %C(bold blue)<%an>%Creset'";
+      glods =
+        "git log --graph --pretty='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ad) %C(bold blue)<%an>%Creset' --date=short";
+      glola =
+        "git log --graph --pretty='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --all";
       glog = "git log --oneline --decorate --graph";
       gloga = "git log --oneline --decorate --graph --all";
 
@@ -284,7 +288,7 @@
       grev = "git revert";
       grh = "git reset";
       grhh = "git reset --hard";
-      groh = "git reset origin/\$(git_current_branch) --hard";
+      groh = "git reset origin/$(git_current_branch) --hard";
       grm = "git rm";
       grmc = "git rm --cached";
       grmv = "git remote rename";
@@ -292,7 +296,7 @@
       grs = "git restore";
       grset = "git remote set-url";
       grss = "git restore --source";
-      grt = "cd \$(git rev-parse --show-toplevel || echo .)";
+      grt = "cd $(git rev-parse --show-toplevel || echo .)";
       gru = "git reset --";
       grup = "git remote update";
       grv = "git remote -v";
@@ -323,7 +327,8 @@
       gtv = "git tag | sort -V";
 
       gunignore = "git update-index --no-assume-unchanged";
-      gunwip = "git log -n 1 | grep -q -c '\\-\\-wip\\-\\-' && git reset HEAD~1";
+      gunwip =
+        "git log -n 1 | grep -q -c '\\-\\-wip\\-\\-' && git reset HEAD~1";
       gup = "git pull --rebase";
       gupv = "git pull --rebase -v";
       gupa = "git pull --rebase --autostash";
@@ -337,7 +342,8 @@
       gwtm = "git worktree move";
 
       gwch = "git whatchanged -p --abbrev-commit --pretty=medium";
-      gwip = "git add -A; git rm \$(git ls-files --deleted) 2> /dev/null; git commit --no-verify --no-gpg-sign -m '--wip-- [skip ci]'";
+      gwip =
+        "git add -A; git rm $(git ls-files --deleted) 2> /dev/null; git commit --no-verify --no-gpg-sign -m '--wip-- [skip ci]'";
 
       # Kubernetes shortcuts (matches oh-my-zsh kubectl plugin)
       k = "kubectl";
