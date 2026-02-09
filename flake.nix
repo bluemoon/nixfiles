@@ -47,6 +47,10 @@
       url = "github:ryantm/agenix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nix-openclaw = {
+      url = "github:openclaw/nix-openclaw";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
   outputs = { self, nixpkgs, darwin, home-manager, ... }@inputs:
     let pkgs = nixpkgs.legacyPackages."aarch64-darwin";
@@ -90,6 +94,45 @@
             security.pam.services.sudo_local.touchIdAuth = true;
             # Match existing nixbld group GID from previous Nix installation
             ids.gids.nixbld = 30000;
+            nixpkgs = {
+              config.allowBroken = true;
+              config.allowUnfree = true;
+              overlays = with inputs; [ nur.overlays.default ];
+            };
+          })
+        ];
+      };
+
+      ####### OpenClaw Server (wz-oc) #######
+      darwinConfigurations."wz-oc" = darwin.lib.darwinSystem {
+        system = "aarch64-darwin";
+        specialArgs = { inherit self inputs; };
+        modules = [
+          ./modules/mac-server.nix
+          inputs.agenix.darwinModules.default
+          ./modules/secrets.nix
+          home-manager.darwinModules.home-manager
+          {
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              backupFileExtension = "backup";
+              extraSpecialArgs = { inherit inputs; };
+              users.wz_oc = {
+                imports = [
+                  inputs.base16.hmModule
+                  ./modules/home.nix
+                  ./modules/openclaw.nix
+                ];
+              };
+            };
+          }
+          ({ ... }: {
+            system.primaryUser = "wz_oc";
+            environment.etc."nix-host".text = "wz-oc";
+          })
+          ({ config, pkgs, lib, ... }: {
+            nix.enable = true;
             nixpkgs = {
               config.allowBroken = true;
               config.allowUnfree = true;

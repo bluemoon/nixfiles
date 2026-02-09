@@ -11,6 +11,7 @@
   home.sessionVariables = {
     EDITOR = "nvim";
     PNPM_HOME = "$HOME/.local/bin";
+    DOCKER_HOST = "unix://${config.home.homeDirectory}/.colima/default/docker.sock";
     # SSL certificates for all programs
     SSL_CERT_FILE = "/etc/ssl/certs/ca-certificates.crt";
     NIX_SSL_CERT_FILE = "/etc/ssl/certs/ca-certificates.crt";
@@ -86,7 +87,7 @@
   programs.ssh = {
     enable = true;
     enableDefaultConfig = false;
-    includes = [ "/Users/bradford/.colima/ssh_config" ];
+    includes = [ "${config.home.homeDirectory}/.colima/ssh_config" ];
     matchBlocks = {
       "studio" = {
         hostname = "mac-studio.home";
@@ -169,6 +170,7 @@
     pkgs.python3Packages.localstack-client
     pkgs.kcat
     pkgs.age
+    inputs.agenix.packages.aarch64-darwin.default
     pkgs.sops
     pkgs.kubectl
 
