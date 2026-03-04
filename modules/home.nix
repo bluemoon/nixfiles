@@ -11,7 +11,8 @@
   home.sessionVariables = {
     EDITOR = "nvim";
     PNPM_HOME = "$HOME/.local/bin";
-    DOCKER_HOST = "unix://${config.home.homeDirectory}/.colima/default/docker.sock";
+    DOCKER_HOST =
+      "unix://${config.home.homeDirectory}/.colima/default/docker.sock";
     # SSL certificates for all programs
     SSL_CERT_FILE = "/etc/ssl/certs/ca-certificates.crt";
     NIX_SSL_CERT_FILE = "/etc/ssl/certs/ca-certificates.crt";
@@ -71,7 +72,7 @@
       user = {
         name = "Bradford Toney";
         email = "bradford.toney@gmail.com";
-        signingkey = "9159E6B4C25B8F6B";
+        signingkey = "~/.ssh/id_ed25519.pub";
       };
       alias = { st = "status"; };
       core = { editor = "nvim"; };
@@ -80,6 +81,8 @@
       pull.rebase = true;
       push.autoSetupRemote = true;
       commit.gpgsign = true;
+      gpg.format = "ssh";
+      gpg.ssh.program = "ssh-keygen";
       rerere.enabled = true;
     };
   };
@@ -89,6 +92,8 @@
     enableDefaultConfig = false;
     includes = [ "${config.home.homeDirectory}/.colima/ssh_config" ];
     matchBlocks = {
+      "*" = { identityFile = "~/.ssh/id_ed25519"; };
+
       "studio" = {
         hostname = "mac-studio.home";
         user = "bradford";
@@ -159,6 +164,7 @@
     pkgs.colima
     pkgs.docker
     pkgs.duckdb
+    pkgs.sqlcmd
     pkgs.pyrefly
     pkgs.jujutsu
     pkgs.codex
