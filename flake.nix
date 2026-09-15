@@ -65,6 +65,7 @@
         specialArgs = { inherit self inputs; };
         modules = [
           ./modules/mac.nix
+          ./modules/macbook.nix
           inputs.agenix.darwinModules.default
           ./modules/secrets.nix
           home-manager.darwinModules.home-manager
@@ -76,7 +77,7 @@
               extraSpecialArgs = { inherit inputs; };
               users.bradfordtoney = { lib, ... }: {
                 home.username = "bradfordtoney";
-                home.homeDirectory = lib.mkForce "/Users/bradford";
+                home.homeDirectory = lib.mkForce "/Users/bradfordtoney";
                 imports = [
                   inputs.base16.hmModule
                   ./modules/home.nix
@@ -90,10 +91,8 @@
             environment.etc."nix-host".text = "bradford-mbp";
           })
           ({ config, pkgs, lib, ... }: {
-            nix.enable = true;
+            nix.enable = false; # Determinate manages Nix and its build users.
             security.pam.services.sudo_local.touchIdAuth = true;
-            # Match existing nixbld group GID from previous Nix installation
-            ids.gids.nixbld = 30000;
             nixpkgs = {
               config.allowBroken = true;
               config.allowUnfree = true;

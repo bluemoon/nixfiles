@@ -1,6 +1,45 @@
 # nixfiles for OSX
 
-## Installation
+## New MacBook (Determinate + AeroSpace)
+
+The `bradford-mbp` host targets Apple Silicon, user `bradfordtoney` (UID 501),
+and `/Users/bradfordtoney`. Install Determinate with its macOS package first;
+flakes are already enabled. Determinate owns the Nix daemon, configuration,
+and build users (`nix.enable = false`); do not apply the old GID 30000 override.
+
+Clone this repository into `~/.config/nixpkgs`, then build and activate:
+
+```sh
+cd ~/.config/nixpkgs
+nix build .#darwinConfigurations.bradford-mbp.system
+sudo ./result/sw/bin/darwin-rebuild switch --flake .#bradford-mbp
+```
+
+The laptop imports `modules/macbook.nix` to use AeroSpace instead of Yabai/skhd.
+After activation, grant AeroSpace Accessibility access in System Settings >
+Privacy & Security > Accessibility. No SIP changes are needed.
+Ghostty must be installed separately for the terminal shortcut.
+
+| Shortcut | Action |
+| --- | --- |
+| Cmd+Enter | Open Ghostty |
+| Alt+H/J/K/L | Focus left/down/up/right |
+| Alt+Shift+H/J/K/L | Swap windows |
+| Alt+1–8 | Select workspace |
+| Alt+Shift+1–8 | Send window to workspace |
+| Alt+X | Previous workspace |
+| Alt+Ctrl+Q/E | Previous/next workspace |
+| Alt+T | Toggle floating/tiling |
+| Alt+D | Toggle AeroSpace fullscreen |
+| Alt+Shift+B | Balance window sizes |
+| Alt+Shift+R | Reload configuration |
+
+AeroSpace workspaces are separate from native macOS Spaces. Floating does not
+reproduce Yabai's center-to-grid action, and fullscreen replaces zoom-parent.
+The old Emacs shortcuts and send-to-recent-workspace shortcut are not mapped.
+The Mac Studio retains its existing Yabai/skhd configuration.
+
+## Installation (other hosts)
 
 1. Install XCode CLI tools
 

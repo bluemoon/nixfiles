@@ -11,7 +11,7 @@ in {
   # Set state version
   system.stateVersion = 6;
 
-  nix = {
+  nix = lib.mkIf config.nix.enable {
     package = pkgs.nix;
     extraOptions = ''
       system = aarch64-darwin # M1 gang
